@@ -56,6 +56,7 @@ export default class App extends React.Component {
             title="Jackis Knapp"
           />
           <Text>Joars Text</Text>
+          <Text>Jacki Text</Text>
         </View>
 
         
