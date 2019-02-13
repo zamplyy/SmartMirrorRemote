@@ -1,17 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Button, Avatar, Header } from 'react-native-elements';
+import { Button, Avatar, Header , Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SortableGrid from 'react-native-sortable-grid'
 
-colors = [
-  primaryColor = '#00838f',
-  primaryLightColor = '#4fb3bf',
-  primaryDarkColor = '#005662',
-  primaryTextColor = '#ffffff'
-]
-
 export default class App extends React.Component {
+
   render() {
     return (
       <View style= {{flex: 1}}>
@@ -19,35 +13,29 @@ export default class App extends React.Component {
         leftComponent={{ icon: 'menu', color: '#fff' }}
         centerComponent={{ text: 'Smart Mirror Remote', style: { color: '#fff' } }}
         rightComponent={{ icon: 'home', color: '#fff' }}
-        backgroundColor= '#00838f'
+        //backgroundColor= {this.state.colors[primaryColor]}
+        backgroundColor = '#005662'
       />
-        <View style={{backgroundColor:'blue', flex:1}}> 
+        <View style={{backgroundColor: '#005662', flex:1}}> 
                 
-        <SortableGrid 
-          itemsPerRow = { 2 }
-          dragActivationTreshold = {1}
-          style= {{}}
-        >
-        {
-          ['a', 'b', 'c', 'd'].map( (letter, index) =>
-            
-          <View style={{backgroundColor:'red', flexDirection:"row"}} key={index} >
-            <Avatar 
-              rounded title={letter} 
-              size = 'medium'
-            />
-            <Avatar 
-              rounded title={letter} 
-              size = 'medium'
-            />
-            <Avatar 
-              rounded title={letter} 
-              size = 'medium'
-            />
-          </View>
-          )
-        }
-        </SortableGrid>
+          <SortableGrid 
+            itemsPerRow = { 2 }
+            dragActivationTreshold = {1}
+            style= {{}}
+          >
+          {
+            ['John', 'Pallo', 'Joar', 'Jacki'].map( (letter, index) =>
+              
+            <View style={{backgroundColor: 'red', flexDirection:"row", justifyContent : 'center'}} key={index} >
+              {/*<Avatar 
+                rounded title={letter}  
+                size = 'medium'
+              />*/}
+              <Input></Input>
+            </View>
+            )
+          }
+          </SortableGrid>
 
         </View>
 
@@ -64,6 +52,13 @@ export default class App extends React.Component {
       </View>
     );
   }
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      
+    };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -72,5 +67,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  primaryColor: {
+    color : '#00838f'
+  },
+  primaryLightColor: {
+    color : '#4fb3bf'
+  },
+  primaryDarkColor: {
+    color : '#005662'
+  },
+  primaryTextColor: {
+    color : '#ffffff'
   },
 });
