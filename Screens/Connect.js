@@ -4,15 +4,11 @@ import { Button, Input} from 'react-native-elements';
 
 export default class Home extends React.Component {
 
-  static navigationOptions = {
-    title: 'Connect To Your RPi',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Connect to your RPi',
+      
+    };
   };
   render() {
     return (
@@ -20,18 +16,30 @@ export default class Home extends React.Component {
         
         <Input style= {{padding : 20}}
           placeholder='Your Raspberry Pi:s IP'
-          shake={true}
+          onChangeText={(text) => this.setState({inputIp: text})}
         />
 
         <Button style= {{padding : 20}}
             title="Connect!"
             onPress= {() => this.props.navigation.navigate('HomeScreen')}
         />
+        <Button style= {{padding : 20}}
+            title="Log ip!"
+            onPress= {() => console.log(this.ValidateIPaddress(this.state.inputIp))}
+        />
         
         
       </View>
     );
   }
+
+  ValidateIPaddress(ipaddress) {  
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+      return (true)  
+    }  
+    alert("You have entered an invalid IP address!")  
+    return (false)  
+  }  
 
   constructor(props) {
     super(props);

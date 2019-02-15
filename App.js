@@ -7,9 +7,9 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContainer
-        ref={nav => {
+        /*ref={nav => {
           this.navigator = nav;
-        }}
+        }}*/
       />
     );
   }
@@ -26,6 +26,18 @@ const AppNavigator = createStackNavigator(
   {
     HomeScreen: Home,
     ConnectScreen: Connect,
+  },
+  {
+    initialRouteName: 'ConnectScreen',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   }
 );
 

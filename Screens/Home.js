@@ -5,16 +5,24 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SortableGrid from 'react-native-sortable-grid'
 
 export default class Connect extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight: (
+        <Button
+          style= {{paddingRight: 10}}
+          onPress={navigation.getParam('onEditButton')}
+          title="Edit"
+          color="#fff"
+        />
+      ),
+    };
   };
+
+  componentWillMount() {
+    this.props.navigation.setParams({ onEditButton: this._onEditButton });
+  }
 
   render() {
     return (
@@ -30,7 +38,7 @@ export default class Connect extends React.Component {
           {
             ['Weather', 'Clock', 'Compliments', 'Dates'].map( (modules, index) =>
               
-            <View style={{ alignItems : 'center',flex : 1}} key={index} >
+            <View style={{ alignItems : 'center',justifyContent : 'center'}} key={index} >
               <Avatar
                 size="large"
                 title={modules.substr(0,1)}
@@ -48,14 +56,14 @@ export default class Connect extends React.Component {
 
         </View>
 
-        <View style={{flex: 1, alignItems: 'center', paddingTop : 30}}> 
-          <Button
-            title="Jackis Knapp"
-            onPress = {this.joarsFunction}
+        <View style={{flex: 1, alignItems: 'center'}}> 
+          <Button style={{paddingTop : 20}}
+            title="Edit"
+            onPress = {this._onEditButton}
           />
 
-          <Button
-            title="Joars Knapp"
+          <Button style={{paddingTop : 20}}
+            title="Log Dragtime"
             onPress = {() => console.log(this.state.dragTime)}
           />
           <Text>Joars Text</Text>
@@ -65,12 +73,16 @@ export default class Connect extends React.Component {
     );
   }
 
-  joarsFunction = () => {
-
-    this.setState({
-      dragTime : 99999
-    })
-
+  _onEditButton = () => {
+    if (this.state.dragTime == 1 ){
+      this.setState({
+        dragTime : 99999
+      })
+    } else {
+      this.setState({
+        dragTime : 1
+      })
+    }
   }
 
   constructor(props) {
