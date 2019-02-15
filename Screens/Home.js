@@ -23,9 +23,12 @@ export default class Connect extends React.Component {
   componentWillMount() {
     this.props.navigation.setParams({ onEditButton: this._onEditButton });
     const { navigation } = this.props;
-    this.setState({
-      socket: navigation.getParam('socket', '2')
-    })
+
+    this.socket = navigation.getParam('socket', '2')
+    this.socket.on('message', this.onReceivedMessage)
+    //this.setState({
+      //socket: navigation.getParam('socket', '2')
+    //})
     this.setState({
       socketConnected: navigation.getParam('socketConnected', true)
     })
@@ -61,7 +64,6 @@ export default class Connect extends React.Component {
             )
           }
           </SortableGrid>
-
         </View>
 
         <View style={{flex: 1, alignItems: 'center'}}> 
@@ -74,6 +76,14 @@ export default class Connect extends React.Component {
             title="Log Dragtime"
             onPress = {() => console.log(this.state.dragTime)}
           />
+
+          <Button style={{paddingTop : 20}}
+            title="Send test message through socket"
+            onPress = {() => this.socket.emit('message', 'My message 123')}
+          />
+
+          <Text>{this.state.message}</Text>
+
         </View>
       </View>
     );
@@ -82,7 +92,7 @@ export default class Connect extends React.Component {
   closeConnect(){
     console.log("trying to close and go back")
 
-    this.state.socket.disconnect()
+    this.socket.disconnect()
    
     this.props.navigation.state.params.onConnect({ socketConnected: false });
 
@@ -101,13 +111,22 @@ export default class Connect extends React.Component {
       })
     }
   }
+  //Event listener
+  onReceivedMessage= (messages) => {
+    console.log("TOG EMOT : "+ messages)
+
+    this.setState({
+      message : messages,
+    })
+  }
 
   constructor(props) {
     super(props);
+    this.socket = 2
     this.state = { 
-      dragTime : 1,
-      socket : 2,
+      dragTime : 99999,
       socketConnected: true,
+      message : "",
     };
   }
 }

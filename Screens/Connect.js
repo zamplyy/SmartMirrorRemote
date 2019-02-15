@@ -44,12 +44,13 @@ export default class Home extends React.Component {
   };
 
   tryToConnect(ipaddress){
-    console.log("is socked connected :" + this.state.socketConnected)
+    //DEBUG BYT MOT ipadress sen
+    let ip = "127.0.0.1"
 
     if (this.state.socketConnected == false){
-      if(this.validateIPaddress(this.state.inputIp)){
+      if(this.validateIPaddress(ip)){
       
-        this.socket = SocketIOClient('http://' + ipaddress + ':3000')
+        this.socket = SocketIOClient('http://' + ip + ':3000')
       }
       setTimeout(() => {
         this.isConnected()
@@ -59,8 +60,6 @@ export default class Home extends React.Component {
   }
 
   isConnected() {
-
-    console.log()
 
     if (this.socket.connected){
       this.setState({
@@ -74,6 +73,7 @@ export default class Home extends React.Component {
       this.setState({
         socketConnected : false
       })
+      alert("Couldn't connect, is the IP address correct?")
     }
 
 
@@ -92,7 +92,7 @@ export default class Home extends React.Component {
     //this.socket = 2 
 
     this.state = {
-      inputIp: "",
+      inputIp: "127.0.0.1",
       socketConnected : false,
     };
   }
