@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input} from 'react-native-elements';
+import SocketIOClient from 'socket.io-client';
 
 export default class Home extends React.Component {
 
@@ -25,7 +26,9 @@ export default class Home extends React.Component {
         />
         <Button style= {{padding : 20}}
             title="Log ip!"
-            onPress= {() => console.log(this.ValidateIPaddress(this.state.inputIp))}
+            onPress= {() => 
+              console.log(this.ValidateIPaddress(this.state.inputIp))
+            }
         />
         
         
@@ -34,7 +37,8 @@ export default class Home extends React.Component {
   }
 
   ValidateIPaddress(ipaddress) {  
-    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {  
+    if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
+      this.socket.emit('message', this.state.inputIp);
       return (true)  
     }  
     alert("You have entered an invalid IP address!")  
@@ -43,6 +47,10 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.socket = SocketIOClient('http://localhost:3000');
+    
+
     this.state = {
       inputIp: "",
       
