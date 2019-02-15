@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { YellowBox } from 'react-native';
+
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Connect from './Screens/Connect';
 import Home from './Screens/Home';
@@ -40,6 +41,10 @@ const AppNavigator = createStackNavigator(
     },
   }
 );
+
+YellowBox.ignoreWarnings([
+    'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+]);
 
 const AppContainer = createAppContainer(AppNavigator);
 

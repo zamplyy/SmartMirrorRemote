@@ -22,6 +22,14 @@ export default class Connect extends React.Component {
 
   componentWillMount() {
     this.props.navigation.setParams({ onEditButton: this._onEditButton });
+    const { navigation } = this.props;
+    this.setState({
+      socket: navigation.getParam('socket', '2')
+    })
+    this.setState({
+      socketConnected: navigation.getParam('socketConnected', true)
+    })
+
   }
 
   render() {
@@ -58,19 +66,28 @@ export default class Connect extends React.Component {
 
         <View style={{flex: 1, alignItems: 'center'}}> 
           <Button style={{paddingTop : 20}}
-            title="Edit"
-            onPress = {this._onEditButton}
+            title="Close Connection to Raspberry Pi"
+            onPress = {() => this.closeConnect()}
           />
 
           <Button style={{paddingTop : 20}}
             title="Log Dragtime"
             onPress = {() => console.log(this.state.dragTime)}
           />
-          <Text>Joars Text</Text>
-          <Text>Jacki Text</Text>
         </View>
       </View>
     );
+  }
+
+  closeConnect(){
+    console.log("trying to close and go back")
+
+    this.state.socket.disconnect()
+   
+    this.props.navigation.state.params.onConnect({ socketConnected: false });
+
+    this.props.navigation.navigate('ConnectScreen')
+
   }
 
   _onEditButton = () => {
@@ -89,6 +106,8 @@ export default class Connect extends React.Component {
     super(props);
     this.state = { 
       dragTime : 1,
+      socket : 2,
+      socketConnected: true,
     };
   }
 }

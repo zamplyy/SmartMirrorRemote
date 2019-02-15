@@ -17,17 +17,19 @@ export default class Home extends React.Component {
         
         <Input style= {{padding : 20}}
           placeholder='Your Raspberry Pi:s IP'
-          onChangeText={(text) => this.setState({inputIp: text})}
+          onChangeText={(text) => 
+            this.setState({inputIp: text})
+          }
         />
 
         <Button style= {{padding : 20}}
             title="Connect!"
-            onPress= {() => this.props.navigation.navigate('HomeScreen')}
+            onPress= {() => this.tryToConnect(this.state.inputIp)}
         />
         <Button style= {{padding : 20}}
             title="Log ip!"
             onPress= {() => 
-              console.log(this.ValidateIPaddress(this.state.inputIp))
+              console.log('Is socket connected ' + this.socket.connected)
             }
         />
         
@@ -35,25 +37,63 @@ export default class Home extends React.Component {
       </View>
     );
   }
+  
 
-  ValidateIPaddress(ipaddress) {  
+  onConnect = data => {
+    this.setState(data);
+  };
+
+  tryToConnect(ipaddress){
+    console.log("is socked connected :" + this.state.socketConnected)
+
+    if (this.state.socketConnected == false){
+      if(this.validateIPaddress(this.state.inputIp)){
+      
+        this.socket = SocketIOClient('http://' + ipaddress + ':3000')
+      }
+      setTimeout(() => {
+        this.isConnected()
+      }, 500)
+    }
+    
+  }
+
+  isConnected() {
+
+    console.log()
+
+    if (this.socket.connected){
+      this.setState({
+        socketConnected : true
+      })
+      this.props.navigation.navigate('HomeScreen', {
+        socket: this.socket,
+        onConnect: this.onConnect,
+      })
+    }else{
+      this.setState({
+        socketConnected : false
+      })
+    }
+
+
+  }
+
+  validateIPaddress(ipaddress) {  
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-      this.socket.emit('message', this.state.inputIp);
       return (true)  
     }  
-    alert("You have entered an invalid IP address!")  
     return (false)  
   }  
 
   constructor(props) {
     super(props);
 
-    this.socket = SocketIOClient('http://localhost:3000');
-    
+    //this.socket = 2 
 
     this.state = {
       inputIp: "",
-      
+      socketConnected : false,
     };
   }
 }
