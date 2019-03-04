@@ -27,12 +27,11 @@ export default class Home extends React.Component {
             onPress= {() => this.tryToConnect(this.state.inputIp)}
         />
         <Button style= {{padding : 20}}
-            title="Log ip!"
+            title="Log is socket connected!"
             onPress= {() => 
               console.log('Is socket connected ' + this.socket.connected)
             }
         />
-        
         
       </View>
     );
@@ -44,13 +43,11 @@ export default class Home extends React.Component {
   };
 
   tryToConnect(ipaddress){
-    //DEBUG BYT MOT ipadress sen
-    let ip = "127.0.0.1"
 
     if (this.state.socketConnected == false){
-      if(this.validateIPaddress(ip)){
+      if(this.validateIPaddress(ipaddress)){
       
-        this.socket = SocketIOClient('http://' + ip + ':3000')
+        this.socket = SocketIOClient('http://' + ipaddress + ':3000')
       }
       setTimeout(() => {
         this.isConnected()

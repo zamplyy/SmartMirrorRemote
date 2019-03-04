@@ -1,9 +1,12 @@
 import React from 'react';
 import { YellowBox } from 'react-native';
 
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { FontAwesome } from "react-native-vector-icons";
 import Connect from './Screens/Connect';
 import Home from './Screens/Home';
+import Settings from './Screens/Settings';
+import Search from './Screens/Search';
 export default class App extends React.Component {
   render() {
     return (
@@ -23,10 +26,44 @@ export default class App extends React.Component {
   }
 }
 
-const AppNavigator = createStackNavigator(
+const AppNavigator = createBottomTabNavigator(
   {
-    HomeScreen: Home,
-    ConnectScreen: Connect,
+    HomeScreen: {
+      screen: Home,
+      navigationOptions: {
+        tabBarLabel: "Home",
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="home" size={30} color={tintColor} />
+        )
+      }
+    },
+    ConnectScreen: {
+      screen: Connect,
+      navigationOptions: {
+        tabBarLabel: "Connect",
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="plug" size={30} color={tintColor} />
+        )
+      }
+    },
+    SearchScreen: {
+      screen: Search,
+      navigationOptions: {
+        tabBarLabel: "Search",
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="search" size={30} color={tintColor} />
+        )
+      }
+    },
+    SettingsScreen: {
+      screen: Settings,
+      navigationOptions: {
+        tabBarLabel: "Settings",
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome name="wrench" size={30} color={tintColor} />
+        )
+      }
+    },
   },
   {
     initialRouteName: 'ConnectScreen',

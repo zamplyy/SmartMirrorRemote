@@ -73,8 +73,8 @@ export default class Connect extends React.Component {
           />
 
           <Button style={{paddingTop : 20}}
-            title="Log Dragtime"
-            onPress = {() => console.log(this.state.dragTime)}
+            title="Move Modules"
+            onPress = {() => this._onEditButton()}
           />
 
           <Button style={{paddingTop : 20}}
@@ -90,12 +90,8 @@ export default class Connect extends React.Component {
   }
 
   closeConnect(){
-    console.log("trying to close and go back")
-
     this.socket.disconnect()
-   
     this.props.navigation.state.params.onConnect({ socketConnected: false });
-
     this.props.navigation.navigate('ConnectScreen')
 
   }
