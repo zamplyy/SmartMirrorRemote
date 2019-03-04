@@ -81,9 +81,14 @@ export default class Connect extends React.Component {
             title="Send test message through socket"
             onPress = {() => this.socket.emit('message', 'My message 123')}
           />
+          <Button style={{paddingTop : 20}}
+            title="Send test message through global socket"
+            onPress = {() => global.socketHej.emit('message', 'TEST THROUGH GLOBAL SOCKET')}
+          />
 
           <Text>{this.state.message}</Text>
-
+          
+          
         </View>
       </View>
     );

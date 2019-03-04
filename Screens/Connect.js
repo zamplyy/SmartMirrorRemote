@@ -48,6 +48,7 @@ export default class Home extends React.Component {
       if(this.validateIPaddress(ipaddress)){
       
         this.socket = SocketIOClient('http://' + ipaddress + ':3000')
+        global.socketHej = SocketIOClient('http://' + ipaddress + ':3000')
       }
       setTimeout(() => {
         this.isConnected()
@@ -62,7 +63,7 @@ export default class Home extends React.Component {
       this.setState({
         socketConnected : true
       })
-      this.props.navigation.navigate('HomeScreen', {
+      this.props.navigation.navigate('Tabs', {
         socket: this.socket,
         onConnect: this.onConnect,
       })
@@ -86,6 +87,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
+    global.socketHej;
     //this.socket = 2 
 
     this.state = {

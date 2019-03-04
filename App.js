@@ -1,7 +1,7 @@
 import React from 'react';
 import { YellowBox } from 'react-native';
 
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator, createAppContainer, createSwitchNavigator, createStackNavigator} from "react-navigation";
 import { FontAwesome } from "react-native-vector-icons";
 import Connect from './Screens/Connect';
 import Home from './Screens/Home';
@@ -11,9 +11,6 @@ export default class App extends React.Component {
   render() {
     return (
       <AppContainer
-        /*ref={nav => {
-          this.navigator = nav;
-        }}*/
       />
     );
   }
@@ -25,8 +22,7 @@ export default class App extends React.Component {
     };
   }
 }
-
-const AppNavigator = createBottomTabNavigator(
+const Tabs = createBottomTabNavigator(
   {
     HomeScreen: {
       screen: Home,
@@ -34,15 +30,6 @@ const AppNavigator = createBottomTabNavigator(
         tabBarLabel: "Home",
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="home" size={30} color={tintColor} />
-        )
-      }
-    },
-    ConnectScreen: {
-      screen: Connect,
-      navigationOptions: {
-        tabBarLabel: "Connect",
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="plug" size={30} color={tintColor} />
         )
       }
     },
@@ -65,23 +52,16 @@ const AppNavigator = createBottomTabNavigator(
       }
     },
   },
-  {
-    initialRouteName: 'ConnectScreen',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  }
 );
+const AppNavigator = createStackNavigator({
+  ConnectScreen: {
+    screen: Connect,
+  },
+  Tabs,
+})
 
 YellowBox.ignoreWarnings([
     'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
 ]);
 
 const AppContainer = createAppContainer(AppNavigator);
-
