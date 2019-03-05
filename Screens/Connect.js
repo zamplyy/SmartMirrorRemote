@@ -29,26 +29,19 @@ export default class Home extends React.Component {
         <Button style= {{padding : 20}}
             title="Log is socket connected!"
             onPress= {() => 
-              console.log('Is socket connected ' + this.socket.connected)
+              console.log('Is socket connected ' + global.socket.connected)
             }
         />
         
       </View>
     );
   }
-  
-
-  onConnect = data => {
-    this.setState(data);
-  };
-
   tryToConnect(ipaddress){
 
     if (this.state.socketConnected == false){
       if(this.validateIPaddress(ipaddress)){
       
-        this.socket = SocketIOClient('http://' + ipaddress + ':3000')
-        global.socketHej = SocketIOClient('http://' + ipaddress + ':3000')
+        global.socket = SocketIOClient('http://' + ipaddress + ':3000')
       }
       setTimeout(() => {
         this.isConnected()
@@ -59,13 +52,12 @@ export default class Home extends React.Component {
 
   isConnected() {
 
-    if (this.socket.connected){
+    if (global.socket.connected){
       this.setState({
         socketConnected : true
       })
       this.props.navigation.navigate('Tabs', {
-        socket: this.socket,
-        onConnect: this.onConnect,
+        socket: global.socket,
       })
     }else{
       this.setState({
@@ -87,8 +79,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    global.socketHej;
-    //this.socket = 2 
+    global.socket;
 
     this.state = {
       inputIp: "127.0.0.1",

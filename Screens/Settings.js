@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
-import { ListItem} from 'react-native-elements';
+import { StyleSheet, Text, View, FlatList, Switch} from 'react-native';
+import { ListItem, Button} from 'react-native-elements';
 
 export default class Settings extends React.Component {
    
@@ -8,11 +8,13 @@ export default class Settings extends React.Component {
 
 
     renderItem = ({ item }) => (
-    <ListItem
-        title={item.name}
-        subtitle={item.subtitle}
-        leftAvatar={{ source: { uri: item.avatar_url } }}
-    />
+        <ListItem
+            switch={{
+                value: this.state.isOn,
+                onValueChange :(value) => this.setState({ isOn: value }),
+            }}
+            title={item.title}
+        />
    )
   render() {
     return (
@@ -20,6 +22,18 @@ export default class Settings extends React.Component {
         <Text style={{textAlign:'center'}}>
             You're on the settings screen
         </Text>
+        <Button
+          onPress={ () => alert(this.state.isOn)}
+          title="Log isOn"
+          color="#fff"
+        />
+        <Switch
+        value={this.state.isOn}
+        onValueChange={(value) => {
+            this.setState({
+                isOn: value
+            })
+        }}/>
         <FlatList
             keyExtractor={this.keyExtractor}
             data={this.state.list}
@@ -31,52 +45,16 @@ export default class Settings extends React.Component {
   }
   constructor(props) {
     super(props);
-    this.state = {  
+    this.state = {
+        isOn : true,
         list : [
         {
-          name: 'Amy Farha',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-          subtitle: 'Vice President'
+            title: 'Show Module 1',
+            isOn : true,
         },
         {
-          name: 'Chris Jackson',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-          subtitle: 'Vice Chairman'
-        },
-        {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'Vice President'
-        },
-        {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Vice Chairman'
-        },
-        {
-          name: 'Amy Farha',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-          subtitle: 'Vice President'
-        },
-        {
-          name: 'Chris Jackson',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-          subtitle: 'Vice Chairman'
-        },
-        {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'Vice President'
-        },
-        {
-            name: 'Chris Jackson',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-            subtitle: 'Vice Chairman'
-        },
-        {
-            name: 'Amy Farha',
-            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            subtitle: 'Vice President'
+            title: 'Show Module 2',
+            isOn : true,
         },
       ],
     };

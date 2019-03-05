@@ -53,7 +53,7 @@ const Tabs = createBottomTabNavigator(
     },
   },
 );
-const AppNavigator = createStackNavigator({
+const AppNavigator = createSwitchNavigator({
   ConnectScreen: {
     screen: Connect,
   },

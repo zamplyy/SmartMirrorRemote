@@ -24,11 +24,7 @@ export default class Connect extends React.Component {
     this.props.navigation.setParams({ onEditButton: this._onEditButton });
     const { navigation } = this.props;
 
-    this.socket = navigation.getParam('socket', '2')
-    this.socket.on('message', this.onReceivedMessage)
-    //this.setState({
-      //socket: navigation.getParam('socket', '2')
-    //})
+    global.socket.on('message', this.onReceivedMessage)
     this.setState({
       socketConnected: navigation.getParam('socketConnected', true)
     })
@@ -79,15 +75,10 @@ export default class Connect extends React.Component {
 
           <Button style={{paddingTop : 20}}
             title="Send test message through socket"
-            onPress = {() => this.socket.emit('message', 'My message 123')}
-          />
-          <Button style={{paddingTop : 20}}
-            title="Send test message through global socket"
-            onPress = {() => global.socketHej.emit('message', 'TEST THROUGH GLOBAL SOCKET')}
+            onPress = {() => global.socket.emit('message', 'My message 123')}
           />
 
           <Text>{this.state.message}</Text>
-          
           
         </View>
       </View>
@@ -95,10 +86,8 @@ export default class Connect extends React.Component {
   }
 
   closeConnect(){
-    this.socket.disconnect()
-    this.props.navigation.state.params.onConnect({ socketConnected: false });
+    global.socket.disconnect()
     this.props.navigation.navigate('ConnectScreen')
-
   }
 
   _onEditButton = () => {
@@ -123,7 +112,6 @@ export default class Connect extends React.Component {
 
   constructor(props) {
     super(props);
-    this.socket = 2
     this.state = { 
       dragTime : 99999,
       socketConnected: true,
