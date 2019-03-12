@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, SafeAreaView} from 'react-native';
 import { Button, Avatar, Header , Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SortableGrid from 'react-native-sortable-grid'
@@ -33,7 +33,7 @@ export default class Connect extends React.Component {
 
   render() {
     return (
-      <View style= {{flex: 1}}>
+      <SafeAreaView style= {{flex: 1}}>
         
         <View style={{backgroundColor: '#005662', flex:1}}> 
                 
@@ -41,17 +41,25 @@ export default class Connect extends React.Component {
             itemsPerRow = { 2 }
             dragActivationTreshold = {this.state.dragTime}
             style= {{}}
+            itemHeight = { 40 }
+            itemWidth = { 40 }
           >
           {
             ['Weather', 'Clock', 'Compliments', 'Dates'].map( (modules, index) =>
               
-            <View style={{ alignItems : 'center',justifyContent : 'center'}} key={index} >
+            <View style={{ alignItems : 'center',justifyContent : 'center', backgroundColor:'red'}} key={index} >
               <Avatar
                 size="large"
                 title={modules.substr(0,1)}
                 onPress={() => console.log("Works!")}
                 activeOpacity={0.7}
               />
+              <Text style={{color: '#ffff'}}>
+                {modules}
+              </Text>
+              <Text style={{color: '#ffff'}}>
+                {modules}
+              </Text>
               <Text style={{color: '#ffff'}}>
                 {modules}
               </Text>
@@ -62,8 +70,8 @@ export default class Connect extends React.Component {
           </SortableGrid>
         </View>
 
-        <View style={{flex: 1, alignItems: 'center'}}> 
-          <Button style={{paddingTop : 20}}
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
+          <Button style={{}}
             title="Close Connection to Raspberry Pi"
             onPress = {() => this.closeConnect()}
           />
@@ -81,7 +89,7 @@ export default class Connect extends React.Component {
           <Text>{this.state.message}</Text>
           
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 
