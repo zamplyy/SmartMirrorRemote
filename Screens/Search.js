@@ -21,7 +21,7 @@ export default class Search extends React.Component {
             }}
             itemStyle={{
               padding: 10,
-              marginTop: 2,
+              marginTop: 4,
               backgroundColor: '#fff',
               borderColor: '#bbb',
               borderWidth: 1,
@@ -36,9 +36,7 @@ export default class Search extends React.Component {
             underlineColorAndroid="transparent"
           />
         </View >
-        <View style={{flex:1}}>
-        <Text>TEXT2</Text>
-        </View>
+        
       </SafeAreaView>
     );
   }
@@ -49,6 +47,7 @@ export default class Search extends React.Component {
         {
           id: 1,
           name: 'JavaScript',
+          aName: 'Hej'
         },
         {
           id: 2,
@@ -76,6 +75,58 @@ export default class Search extends React.Component {
         },
         {
           id: 8,
+          name: 'Swift',
+        },
+        {
+          id: 9,
+          name: 'Swift',
+        },
+        {
+          id: 10,
+          name: 'Swift',
+        },
+        {
+          id: 11,
+          name: 'Swift',
+        },
+        {
+          id: 12,
+          name: 'Swift',
+        },
+        {
+          id: 13,
+          name: 'Swift',
+        },
+        {
+          id: 14,
+          name: 'Swift',
+        },
+        {
+          id: 15,
+          name: 'Swift',
+        },
+        {
+          id: 16,
+          name: 'Swift',
+        },
+        {
+          id: 17,
+          name: 'Swift',
+        },
+        {
+          id: 18,
+          name: 'Swift',
+        },
+        {
+          id: 19,
+          name: 'Swift',
+        },
+        {
+          id: 20,
+          name: 'Swift',
+        },
+        {
+          id: 21,
           name: 'Swift',
         },
       ],
