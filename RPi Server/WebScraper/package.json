@@ -1,0 +1,20 @@
+{
+  "name": "webscraper",
+  "version": "1.0.0",
+  "description": "a quick webscraper for grabbing 3rd party modules",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webscraper"
+  ],
+  "author": "Joar Karlsson",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "puppeteer": "^1.13.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}

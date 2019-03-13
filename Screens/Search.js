@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import { Button, Avatar , Input} from 'react-native-elements';
 import SearchableDropdown from 'react-native-searchable-dropdown'; 
+import iafoiaj from './../Components/thirdpartylibs.json';
 
 export default class Search extends React.Component {
 
@@ -11,7 +12,7 @@ export default class Search extends React.Component {
         <View style ={{flex: 6}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
-            onItemSelect={item => console.log(JSON.stringify(item))}
+            onItemSelect={item => console.log((item))}
             containerStyle={{ padding: 5 }}
             textInputStyle={{
               padding: 12,
@@ -29,8 +30,8 @@ export default class Search extends React.Component {
             }}
             itemTextStyle={{ color: '#222' }}
             itemsContainerStyle={{}}
-            items={this.state.items}
-            //defaultIndex={}
+            items= {this.state.items}
+            defaultIndex={ 2 }
             placeholder="Search for third party modules!"
             resetValue={false}
             underlineColorAndroid="transparent"
@@ -40,7 +41,7 @@ export default class Search extends React.Component {
           <Button style= {{}}
               title="Install"
               onPress= {() => 
-                console.log('Installing')
+                console.log(JSON.parse(thirdpartylibs))
               }
           />
           <Button style= {{}}
@@ -55,96 +56,44 @@ export default class Search extends React.Component {
       </SafeAreaView>
     );
   }
+  componentWillMount() {
+    
+    
+    this.setState({
+      items: iafoiaj.thirdpartylibs
+    })
+    
+    
+    
+  }
+
+  
   constructor(props) {
     super(props);
     this.state = { 
       items : [
         {
           id: 1,
-          name: 'JavaScript',
-          aName: 'Hej'
+          name: "MagicMirror-Module-Template",
+          "Author": "MichMich",
+          "Description": "Module to help developers to start building their own modules for the MagicMirror.",
+          "Url": "https://github.com/roramirez/MagicMirror-Module-Template"
         },
         {
-          id: 2,
-          name: 'Java',
+            id: 2,
+            name: "MMM-Button",
+            "Author": "PtrBld",
+            "Description": "Use a button to hide or show different modules via a broadcast message.",
+            "Url": "https://github.com/ptrbld/MMM-Button"
         },
         {
-          id: 3,
-          name: 'Ruby',
+            id: 3,
+            name: "MMM-Buttons",
+            "Author": "Jopyth",
+            "Description": "More complicated, but also more powerful: multiple buttons, configurable notifications, different actions on short and long press.",
+            "Url": "https://github.com/Jopyth/MMM-Buttons"
         },
-        {
-          id: 4,
-          name: 'React Native',
-        },
-        {
-          id: 5,
-          name: 'PHP',
-        },
-        {
-          id: 6,
-          name: 'Python',
-        },
-        {
-          id: 7,
-          name: 'Go',
-        },
-        {
-          id: 8,
-          name: 'Swift',
-        },
-        {
-          id: 9,
-          name: 'Swift',
-        },
-        {
-          id: 10,
-          name: 'Swift',
-        },
-        {
-          id: 11,
-          name: 'Swift',
-        },
-        {
-          id: 12,
-          name: 'Swift',
-        },
-        {
-          id: 13,
-          name: 'Swift',
-        },
-        {
-          id: 14,
-          name: 'Swift',
-        },
-        {
-          id: 15,
-          name: 'Swift',
-        },
-        {
-          id: 16,
-          name: 'Swift',
-        },
-        {
-          id: 17,
-          name: 'Swift',
-        },
-        {
-          id: 18,
-          name: 'Swift',
-        },
-        {
-          id: 19,
-          name: 'Swift',
-        },
-        {
-          id: 20,
-          name: 'Swift',
-        },
-        {
-          id: 21,
-          name: 'Swift',
-        },
-      ],
+      ]
     };
   }
 }
