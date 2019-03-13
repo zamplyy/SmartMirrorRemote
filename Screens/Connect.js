@@ -84,7 +84,7 @@ export default class Home extends React.Component {
     global.socket;
 
     this.state = {
-      inputIp: "192.168.10.206",
+      inputIp: "127.0.0.1",
       socketConnected : false,
     };
   }

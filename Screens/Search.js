@@ -7,8 +7,8 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style= {{flex: 1}}>
-        <View style ={{flex: 1}}>
+      <SafeAreaView style= {{flex: 1, justifyContent : 'space-around'}}>
+        <View style ={{flex: 6}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
             onItemSelect={item => console.log(JSON.stringify(item))}
@@ -36,6 +36,21 @@ export default class Search extends React.Component {
             underlineColorAndroid="transparent"
           />
         </View >
+        <View style= {{flex:1 , flexDirection: 'row', marginTop: 40, alignItems : 'center', justifyContent: 'space-around'}}>
+          <Button style= {{}}
+              title="Install"
+              onPress= {() => 
+                console.log('Installing')
+              }
+          />
+          <Button style= {{}}
+              title="Uninstall"
+              onPress= {() => 
+                console.log('Uninstall')
+              }
+          />
+
+        </View>
         
       </SafeAreaView>
     );

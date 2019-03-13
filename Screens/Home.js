@@ -41,27 +41,19 @@ export default class Connect extends React.Component {
             itemsPerRow = { 2 }
             dragActivationTreshold = {this.state.dragTime}
             style= {{}}
-            itemHeight = { 40 }
-            itemWidth = { 40 }
           >
           {
-            ['Weather', 'Clock', 'Compliments', 'Dates'].map( (modules, index) =>
+            ['Weather', 'Clock', 'Compliments', 'Dates'].map( (module, index) =>
               
-            <View style={{ alignItems : 'center',justifyContent : 'center', backgroundColor:'red'}} key={index} >
+            <View style={{ alignSelf:'center', flexBasis: '50%'}} key={index} >
               <Avatar
                 size="large"
-                title={modules.substr(0,1)}
+                title={module.substr(0,1)}
                 onPress={() => console.log("Works!")}
                 activeOpacity={0.7}
               />
-              <Text style={{color: '#ffff'}}>
-                {modules}
-              </Text>
-              <Text style={{color: '#ffff'}}>
-                {modules}
-              </Text>
-              <Text style={{color: '#ffff'}}>
-                {modules}
+              <Text style={{color: '#ffff', textAlign : 'center'}}>
+                {module}
               </Text>
 
             </View>
@@ -114,7 +106,7 @@ export default class Connect extends React.Component {
     console.log("TOG EMOT : "+ messages)
 
     this.setState({
-      message : messages,
+      message : this.state.message + messages,
     })
   }
 
