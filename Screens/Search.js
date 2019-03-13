@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import { Button, Avatar , Icon, Card} from 'react-native-elements';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import { Button, Avatar , Icon, Header} from 'react-native-elements';
 import SearchableDropdown from 'react-native-searchable-dropdown'; 
 import thirdpartylibs from './../Components/thirdpartylibs.json';
 
@@ -8,7 +8,19 @@ export default class Search extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style= {{flex: 1, justifyContent : 'space-around'}}>
+      <View style= {{flex: 1}}>
+        <Header
+          placement="left"
+          statusBarProps={{ barStyle: 'light-content' }}
+          barStyle="light-content" // or directly
+          rightComponent={{ icon: 'home', style: { color: '#fff' } }}
+          leftComponent={{ icon: 'home', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Search', style: { color: '#fff' } }}
+          containerStyle={{
+            backgroundColor: '#3D6DCC',
+            justifyContent: 'space-around',
+          }}
+        />
         <View style ={{flex: 1}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
@@ -39,34 +51,21 @@ export default class Search extends React.Component {
             underlineColorAndroid="transparent"
           />
         </View >
-        <View style= {{flex:1, marginTop: 40,}}>
-          <View style= {{flex:1}}>
-          <Card
-            title= {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>}>
-            <Text style={{marginBottom: 10}}>
-              {this.state.selectedItem.Description}
-            </Text>
-            
-          </Card>
-          </View>
-          <View style= {{flex:1 , flexDirection: 'row', alignItems : 'center', justifyContent: 'space-evenly'}}>
-            <Button style= {{}}
-                title="Install"
-                onPress= {() => 
-                  console.log('Install')
-                }
+        <View style= {{flex:1, marginTop: 40, paddingHorizontal: 20}}>
+            <Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>
+            <ScrollView>
+              <Text style={{}}>
+                {this.state.selectedItem.Description}
+              </Text>
+            </ScrollView>
+            <Button
+              icon={<Icon name='code' color='#ffffff' />}
+              backgroundColor='#03A9F4'
+              containerStyle={{paddingBottom: 20}}
+              title='INSTALL' 
             />
-            <Button style= {{}}
-                title="Uninstall"
-                onPress= {() => 
-                  console.log('Uninstall')
-                }
-            />
-          </View>
-
         </View>
-        
-      </SafeAreaView>
+      </View>
     );
   }
   componentWillMount() {

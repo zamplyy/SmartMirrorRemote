@@ -7,6 +7,7 @@ import Connect from './Screens/Connect';
 import Home from './Screens/Home';
 import Settings from './Screens/Settings';
 import Search from './Screens/Search';
+import Configuration from './Screens/Configuration';
 export default class App extends React.Component {
   render() {
     return (

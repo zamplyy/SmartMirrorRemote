@@ -26,12 +26,6 @@ export default class Home extends React.Component {
             title="Connect!"
             onPress= {() => this.tryToConnect(this.state.inputIp)}
         />
-        <Button style= {{padding : 20}}
-            title="Log is socket connected!"
-            onPress= {() => 
-              console.log('Is socket connected ' + global.socket.connected)
-            }
-        />
         
       </View>
     );

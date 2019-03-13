@@ -33,7 +33,19 @@ export default class Connect extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style= {{flex: 1}}>
+      <View style= {{flex: 1}}>
+      <Header
+        placement="left"
+        statusBarProps={{ barStyle: 'light-content' }}
+        barStyle="light-content" // or directly
+        rightComponent={{ icon: 'home', style: { color: '#fff' } }}
+        leftComponent={{ icon: 'home', style: { color: '#fff' } }}
+        centerComponent={{ text: 'Home', style: { color: '#fff' } }}
+        containerStyle={{
+          backgroundColor: '#3D6DCC',
+          justifyContent: 'space-around',
+        }}
+      />
         
         <View style={{backgroundColor: '#005662', flex:1}}> 
                 
@@ -81,7 +93,7 @@ export default class Connect extends React.Component {
           <Text>{this.state.message}</Text>
           
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 

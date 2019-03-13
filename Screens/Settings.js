@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, Switch} from 'react-native';
-import { ListItem, Button} from 'react-native-elements';
+import { ListItem, Button, Header} from 'react-native-elements';
 
 export default class Settings extends React.Component {
    
@@ -18,7 +18,19 @@ export default class Settings extends React.Component {
    )
   render() {
     return (
-        <View style= {{flex: 1, justifyContent:'center', paddingTop: 100}}>
+        <View style= {{flex: 1}}>
+        <Header
+          placement="left"
+          statusBarProps={{ barStyle: 'light-content' }}
+          barStyle="light-content" // or directly
+          rightComponent={{ icon: 'home', style: { color: '#fff' } }}
+          leftComponent={{ icon: 'home', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Settings', style: { color: '#fff' } }}
+          containerStyle={{
+            backgroundColor: '#3D6DCC',
+            justifyContent: 'space-around',
+          }}
+        />
         <Text style={{textAlign:'center'}}>
             You're on the settings screen
         </Text>
