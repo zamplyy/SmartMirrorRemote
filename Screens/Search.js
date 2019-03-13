@@ -1,18 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import { Button, Avatar , Input} from 'react-native-elements';
+import { Button, Avatar , Icon, Card} from 'react-native-elements';
 import SearchableDropdown from 'react-native-searchable-dropdown'; 
-import iafoiaj from './../Components/thirdpartylibs.json';
+import thirdpartylibs from './../Components/thirdpartylibs.json';
 
 export default class Search extends React.Component {
 
   render() {
     return (
       <SafeAreaView style= {{flex: 1, justifyContent : 'space-around'}}>
-        <View style ={{flex: 6}}>
+        <View style ={{flex: 1}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
-            onItemSelect={item => console.log((item))}
+            onItemSelect={item => this.setState({
+              selectedItem: item
+            })}
             containerStyle={{ padding: 5 }}
             textInputStyle={{
               padding: 12,
@@ -31,25 +33,36 @@ export default class Search extends React.Component {
             itemTextStyle={{ color: '#222' }}
             itemsContainerStyle={{}}
             items= {this.state.items}
-            defaultIndex={ 2 }
+            //defaultIndex={ }
             placeholder="Search for third party modules!"
             resetValue={false}
             underlineColorAndroid="transparent"
           />
         </View >
-        <View style= {{flex:1 , flexDirection: 'row', marginTop: 40, alignItems : 'center', justifyContent: 'space-around'}}>
-          <Button style= {{}}
-              title="Install"
-              onPress= {() => 
-                console.log('Install')
-              }
-          />
-          <Button style= {{}}
-              title="Uninstall"
-              onPress= {() => 
-                console.log('Uninstall')
-              }
-          />
+        <View style= {{flex:1, marginTop: 40,}}>
+          <View style= {{flex:1}}>
+          <Card
+            title= {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>}>
+            <Text style={{marginBottom: 10}}>
+              {this.state.selectedItem.Description}
+            </Text>
+            
+          </Card>
+          </View>
+          <View style= {{flex:1 , flexDirection: 'row', alignItems : 'center', justifyContent: 'space-evenly'}}>
+            <Button style= {{}}
+                title="Install"
+                onPress= {() => 
+                  console.log('Install')
+                }
+            />
+            <Button style= {{}}
+                title="Uninstall"
+                onPress= {() => 
+                  console.log('Uninstall')
+                }
+            />
+          </View>
 
         </View>
         
@@ -57,43 +70,22 @@ export default class Search extends React.Component {
     );
   }
   componentWillMount() {
-    
-    
     this.setState({
-      items: iafoiaj.thirdpartylibs
+      items: thirdpartylibs.thirdpartylibs
     })
-    
-    
-    
   }
-
   
   constructor(props) {
     super(props);
     this.state = { 
       items : [
-        {
-          id: 1,
-          name: "MagicMirror-Module-Template",
-          "Author": "MichMich",
-          "Description": "Module to help developers to start building their own modules for the MagicMirror.",
-          "Url": "https://github.com/roramirez/MagicMirror-Module-Template"
-        },
-        {
-            id: 2,
-            name: "MMM-Button",
-            "Author": "PtrBld",
-            "Description": "Use a button to hide or show different modules via a broadcast message.",
-            "Url": "https://github.com/ptrbld/MMM-Button"
-        },
-        {
-            id: 3,
-            name: "MMM-Buttons",
-            "Author": "Jopyth",
-            "Description": "More complicated, but also more powerful: multiple buttons, configurable notifications, different actions on short and long press.",
-            "Url": "https://github.com/Jopyth/MMM-Buttons"
-        },
-      ]
+       
+      ],
+      selectedItem : {
+        name: '',
+        Description: '',
+        url: '',
+      }
     };
   }
 }
