@@ -41,7 +41,7 @@ export default class Search extends React.Component {
           <Button style= {{}}
               title="Install"
               onPress= {() => 
-                console.log(JSON.parse(thirdpartylibs))
+                console.log('Install')
               }
           />
           <Button style= {{}}

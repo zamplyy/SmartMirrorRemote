@@ -13,7 +13,7 @@ export default class Home extends React.Component {
   };
   render() {
     return (
-      <View style= {{flex:'1', justifyContent: 'center' }}>
+      <View style= {{flex:1 , justifyContent: 'center' }}>
         
         <Input style= {{padding : 20}}
           placeholder='Your Raspberry Pi:s IP'
