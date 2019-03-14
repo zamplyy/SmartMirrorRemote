@@ -13,7 +13,7 @@ export default class Search extends React.Component {
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle="light-content" // or directly
-          rightComponent={{ icon: 'home', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'school', style: { color: '#fff' } }}
           leftComponent={{ icon: 'home', style: { color: '#fff' } }}
           centerComponent={{ text: 'Search', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
           containerStyle={{

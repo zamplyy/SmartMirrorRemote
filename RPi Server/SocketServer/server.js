@@ -28,6 +28,10 @@ websocket.on('connection', (socket) => {
 
     socket.on('changePosition', (message) => {
         console.log('changePosition ' + message)
+
+        message.forEach(item => {
+            console.log(item.key)
+        });
         console.log('Need to translate and forward to MM')
     });
 

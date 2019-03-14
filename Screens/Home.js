@@ -66,7 +66,9 @@ export default class Connect extends React.Component {
             itemsPerRow = { 2 }
             dragActivationTreshold = {this.state.dragTime}
             style= {{}}
-            onDragRelease                = { (itemOrder) => console.log("Drag was released, the blocks are in the following order: ", itemOrder) }
+            onDragRelease = { (itemOrder) => this.setState({
+              currentLayout : itemOrder.itemOrder,
+            }) }
           >
           {
             ['Weather', 'Clock', 'Compliments', 'Dates'].map( (module, index) =>
@@ -98,6 +100,11 @@ export default class Connect extends React.Component {
             onPress = {() => global.socket.emit('message', 'My message 123')}
           />
 
+          <Button style={{paddingTop : 20}}
+            title="Log currentlayout"
+            onPress = {() => console.log(this.state.currentLayout)}
+          />
+
           <Text>{this.state.message}</Text>
           
         </View>
@@ -116,7 +123,7 @@ export default class Connect extends React.Component {
         dragTime : 99999,
         isEdit : false,
       })
-      global.socket.emit('changePosition', 'test')
+      global.socket.emit('changePosition', this.state.currentLayout)
 
     } else {
       this.setState({
@@ -141,6 +148,8 @@ export default class Connect extends React.Component {
       socketConnected: true,
       message : "",
       isEdit : false,
+      currentLayout : [
+      ],
     };
   }
 }
