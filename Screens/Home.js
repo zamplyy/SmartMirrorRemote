@@ -29,6 +29,8 @@ export default class Connect extends React.Component {
       socketConnected: navigation.getParam('socketConnected', true)
     })
 
+    global.socket.emit('getLayout', 'test');
+
   }
 
   render() {
@@ -38,9 +40,20 @@ export default class Connect extends React.Component {
         placement="left"
         statusBarProps={{ barStyle: 'light-content' }}
         barStyle="light-content" // or directly
-        rightComponent={{ icon: 'home', style: { color: '#fff' } }}
-        leftComponent={{ icon: 'home', style: { color: '#fff' } }}
-        centerComponent={{ text: 'Home', style: { color: '#fff' } }}
+        rightComponent={
+          <TouchableHighlight
+            style = {{paddingRight : 10}}
+            onPress = {() => this._onEditButton()}
+            underlayColor = '#3D6DCC'
+            hitSlop={{top: 10, bottom: 10, left: 20, right: 10}}
+            >
+            <Text
+              style = {{color: '#fff', fontWeight: 'bold', fontSize: 15}}>
+              {this.state.isEdit ? 'Save' : 'Edit'}
+            </Text>
+          </TouchableHighlight>
+        }
+        centerComponent={{ text: 'Home', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
         containerStyle={{
           backgroundColor: '#3D6DCC',
           justifyContent: 'space-around',
@@ -53,6 +66,7 @@ export default class Connect extends React.Component {
             itemsPerRow = { 2 }
             dragActivationTreshold = {this.state.dragTime}
             style= {{}}
+            onDragRelease                = { (itemOrder) => console.log("Drag was released, the blocks are in the following order: ", itemOrder) }
           >
           {
             ['Weather', 'Clock', 'Compliments', 'Dates'].map( (module, index) =>
@@ -61,7 +75,6 @@ export default class Connect extends React.Component {
               <Avatar
                 size="large"
                 title={module.substr(0,1)}
-                onPress={() => console.log("Works!")}
                 activeOpacity={0.7}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
@@ -78,11 +91,6 @@ export default class Connect extends React.Component {
           <Button style={{}}
             title="Close Connection to Raspberry Pi"
             onPress = {() => this.closeConnect()}
-          />
-
-          <Button style={{paddingTop : 20}}
-            title="Move Modules"
-            onPress = {() => this._onEditButton()}
           />
 
           <Button style={{paddingTop : 20}}
@@ -105,11 +113,15 @@ export default class Connect extends React.Component {
   _onEditButton = () => {
     if (this.state.dragTime == 1 ){
       this.setState({
-        dragTime : 99999
+        dragTime : 99999,
+        isEdit : false,
       })
+      global.socket.emit('changePosition', 'test')
+
     } else {
       this.setState({
-        dragTime : 1
+        dragTime : 1,
+        isEdit : true,
       })
     }
   }
@@ -128,6 +140,7 @@ export default class Connect extends React.Component {
       dragTime : 99999,
       socketConnected: true,
       message : "",
+      isEdit : false,
     };
   }
 }
