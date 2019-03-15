@@ -4,11 +4,10 @@ import { Button, Avatar, Header , Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SortableGrid from 'react-native-sortable-grid'
 
-export default class Connect extends React.Component {
+export default class Home extends React.Component {
 
-  static navigationOptions = ({ navigation }) => {
+  /*static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Home',
       headerRight: (
         <Button
           style= {{paddingRight: 10}}
@@ -18,7 +17,7 @@ export default class Connect extends React.Component {
         />
       ),
     };
-  };
+  };*/
 
   componentWillMount() {
     this.props.navigation.setParams({ onEditButton: this._onEditButton });
@@ -36,7 +35,7 @@ export default class Connect extends React.Component {
   render() {
     return (
       <View style= {{flex: 1}}>
-      <Header
+      {<Header
         placement="left"
         statusBarProps={{ barStyle: 'light-content' }}
         barStyle="light-content" // or directly
@@ -58,7 +57,7 @@ export default class Connect extends React.Component {
           backgroundColor: '#3D6DCC',
           justifyContent: 'space-around',
         }}
-      />
+      />}
         
         <View style={{backgroundColor: '#005662', flex:1}}> 
                 
@@ -69,6 +68,7 @@ export default class Connect extends React.Component {
             onDragRelease = { (itemOrder) => this.setState({
               currentLayout : itemOrder.itemOrder,
             }) }
+            
           >
           {
             ['Weather', 'Clock', 'Compliments', 'Dates'].map( (module, index) =>
@@ -78,6 +78,7 @@ export default class Connect extends React.Component {
                 size="large"
                 title={module.substr(0,1)}
                 activeOpacity={0.7}
+                onLongPress = {() => this.props.navigation.navigate('Configuration')}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
                 {module}
@@ -98,11 +99,6 @@ export default class Connect extends React.Component {
           <Button style={{paddingTop : 20}}
             title="Send test message through socket"
             onPress = {() => global.socket.emit('message', 'My message 123')}
-          />
-
-          <Button style={{paddingTop : 20}}
-            title="Log currentlayout"
-            onPress = {() => console.log(this.state.currentLayout)}
           />
 
           <Text>{this.state.message}</Text>

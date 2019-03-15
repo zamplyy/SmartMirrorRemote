@@ -23,10 +23,39 @@ export default class App extends React.Component {
     };
   }
 }
+
+const HomeScreens = createStackNavigator(
+  {
+    Home: {
+      screen: Home,
+      navigationOptions: () => ({
+        title: `Home`,
+        header: null,
+      }),
+    },
+    Configuration: {
+      screen: Configuration,
+      navigationOptions: () => ({
+        title: `Configuration`,
+        headerStyle: {
+          backgroundColor: '#3D6DCC',
+
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          
+        },
+        headerTintColor: '#fff',
+      }),
+    }
+
+  }
+)
+
 const Tabs = createBottomTabNavigator(
   {
     HomeScreen: {
-      screen: Home,
+      screen: HomeScreens,
       navigationOptions: {
         tabBarLabel: "Home",
         tabBarIcon: ({ tintColor }) => (

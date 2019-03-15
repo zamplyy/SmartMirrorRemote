@@ -7,7 +7,7 @@ export default class Settings extends React.Component {
    
   render() {
     return (
-        <View style= {{flex: 1}}>
+      <View style= {{flex: 1}}>
          <Header
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
@@ -20,55 +20,48 @@ export default class Settings extends React.Component {
             justifyContent: 'space-around',
           }}
         />
-       <ScrollView >
-        <Setting title= "Brightness">
-        <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
-        
-        <TouchableHighlight onPress={this._onPressButton}>
-        <Icon
-                                name= 'brightness-1'
-                                type='material'
-                                size= {40}
-                                color='#ffffff'
-                            />
-    </TouchableHighlight>
-
-    <TouchableHighlight onPress={this._onPressButton}>
-        <Icon
-                                name= 'brightness-2'
-                                type='material'
-                                size= {40}
-                                color='#ffffff'
-                                
-                            />
-    </TouchableHighlight>
-
-    <TouchableHighlight onPress={this._onPressButton}>
-        <Icon
-                                name= 'brightness-3'
-                                type='material'
-                                size= {40}
-                                color='#ffffff'
-                            />
-    </TouchableHighlight>
-        
-        
-            </View>
-        </Setting>
-        <Setting title="Logoff">
-        <Button
+        <ScrollView >
+          <Setting title= "Brightness">
+          <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
+            <TouchableHighlight onPress={ () => console.log('Pressed Brightness 1')}>
+              <Icon
+                name= 'brightness-1'
+                type='material'
+                size= {40}
+                color='#ffffff'
+              />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => console.log('Pressed Brightness 2')}>
+            <Icon
+              name= 'brightness-2'
+              type='material'
+              size= {40}
+              color='#ffffff'
+            />
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => console.log('Pressed Brightness 3')}>
+              <Icon
+                name= 'brightness-3'
+                type='material'
+                size= {40}
+                color='#ffffff'
+              />
+            </TouchableHighlight>
+          </View>
+          </Setting>
+          <Setting title="Logoff">
+            <Button
               icon={<Icon name='code' color='#ffffff' />}
               backgroundColor='#03A9F4'
               title='INSTALL' 
             />
-          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-        </Setting>
-        <Setting title="Activate/inactivate">
-          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</Text>
-        </Setting>
+            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+          </Setting>
+          <Setting title="Activate/inactivate">
+            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</Text>
+          </Setting>
         </ScrollView>
-      
-        </View>
+      </View>
     );
   }
   constructor(props) { 

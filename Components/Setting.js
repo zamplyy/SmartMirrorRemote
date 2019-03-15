@@ -29,7 +29,7 @@ class Setting extends React.Component{
             expanded : !this.state.expanded
         });
 
-        this.state.animation.setValue(finalValue);
+        this.state.animation.setValue(initialValue);
         Animated.spring(
             this.state.animation,
             {
@@ -103,7 +103,7 @@ var styles = StyleSheet.create({
         fontWeight:'bold'
     },
     button      : {
-
+        alignSelf: 'center'
     },
     buttonImage : {
         width   : 30,
