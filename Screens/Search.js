@@ -13,9 +13,9 @@ export default class Search extends React.Component {
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle="light-content" // or directly
-          rightComponent={{ icon: 'home', style: { color: '#fff' } }}
+          rightComponent={{ icon: 'school', style: { color: '#fff' } }}
           leftComponent={{ icon: 'home', style: { color: '#fff' } }}
-          centerComponent={{ text: 'Search', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Search', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
           containerStyle={{
             backgroundColor: '#3D6DCC',
             justifyContent: 'space-around',
@@ -54,7 +54,7 @@ export default class Search extends React.Component {
         <View style= {{flex:1, marginTop: 40, paddingHorizontal: 20}}>
             <Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>
             <ScrollView>
-              <Text style={{}}>
+              <Text style={{textAlign : 'center',}}>
                 {this.state.selectedItem.Description}
               </Text>
             </ScrollView>
@@ -62,7 +62,10 @@ export default class Search extends React.Component {
               icon={<Icon name='code' color='#ffffff' />}
               backgroundColor='#03A9F4'
               containerStyle={{paddingBottom: 20}}
-              title='INSTALL' 
+              title='INSTALL'
+              onPress = {() => 
+                global.socket.emit('installModule', this.state.selectedItem)
+              } 
             />
         </View>
       </View>

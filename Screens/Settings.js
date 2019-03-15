@@ -14,7 +14,7 @@ export default class Settings extends React.Component {
           barStyle="light-content" // or directly
           rightComponent={{ icon: 'home', style: { color: '#fff' } }}
           leftComponent={{ icon: 'home', style: { color: '#fff' } }}
-          centerComponent={{ text: 'Settings', style: { color: '#fff' } }}
+          centerComponent={{ text: 'Settings', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
           containerStyle={{
             backgroundColor: '#3D6DCC',
             justifyContent: 'space-around',
