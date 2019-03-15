@@ -1,25 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Switch} from 'react-native';
-import { ListItem, Button, Header} from 'react-native-elements';
+import { StyleSheet, Text, View, FlatList, Switch, ScrollView, TouchableHighlight} from 'react-native';
+import { ListItem, Button, Header, Icon} from 'react-native-elements';
+import Setting from '../Components/Setting'
 
 export default class Settings extends React.Component {
    
-    keyExtractor =  (item, index) => index.toString();
-
-
-    renderItem = ({ item }) => (
-        <ListItem
-            switch={{
-                value: this.state.isOn,
-                onValueChange :(value) => this.setState({ isOn: value }),
-            }}
-            title={item.title}
-        />
-   )
   render() {
     return (
         <View style= {{flex: 1}}>
-        <Header
+         <Header
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle="light-content" // or directly
@@ -31,44 +20,61 @@ export default class Settings extends React.Component {
             justifyContent: 'space-around',
           }}
         />
-        <Text style={{textAlign:'center'}}>
-            You're on the settings screen
-        </Text>
-        <Button
-          onPress={ () => alert(this.state.isOn)}
-          title="Log isOn"
-          color="#fff"
-        />
-        <Switch
-        value={this.state.isOn}
-        onValueChange={(value) => {
-            this.setState({
-                isOn: value
-            })
-        }}/>
-        <FlatList
-            keyExtractor={this.keyExtractor}
-            data={this.state.list}
-            renderItem={this.renderItem}
-        />
+       <ScrollView >
+        <Setting title= "Brightness">
+        <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
         
+        <TouchableHighlight onPress={this._onPressButton}>
+        <Icon
+                                name= 'brightness-1'
+                                type='material'
+                                size= {40}
+                                color='#ffffff'
+                            />
+    </TouchableHighlight>
+
+    <TouchableHighlight onPress={this._onPressButton}>
+        <Icon
+                                name= 'brightness-2'
+                                type='material'
+                                size= {40}
+                                color='#ffffff'
+                                
+                            />
+    </TouchableHighlight>
+
+    <TouchableHighlight onPress={this._onPressButton}>
+        <Icon
+                                name= 'brightness-3'
+                                type='material'
+                                size= {40}
+                                color='#ffffff'
+                            />
+    </TouchableHighlight>
+        
+        
+            </View>
+        </Setting>
+        <Setting title="Logoff">
+        <Button
+              icon={<Icon name='code' color='#ffffff' />}
+              backgroundColor='#03A9F4'
+              title='INSTALL' 
+            />
+          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+        </Setting>
+        <Setting title="Activate/inactivate">
+          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</Text>
+        </Setting>
+        </ScrollView>
+      
         </View>
     );
   }
-  constructor(props) {
+  constructor(props) { 
     super(props);
     this.state = {
-        isOn : true,
-        list : [
-        {
-            title: 'Show Module 1',
-            isOn : true,
-        },
-        {
-            title: 'Show Module 2',
-            isOn : true,
-        },
-      ],
+        
     };
   }
 }
@@ -76,6 +82,7 @@ export default class Settings extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop      : 30,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
