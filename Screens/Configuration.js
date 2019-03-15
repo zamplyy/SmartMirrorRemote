@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-import { Button, Card, Icon} from 'react-native-elements';
+import { StyleSheet, Text, View, } from 'react-native';
+import { Button, Card, Avatar} from 'react-native-elements';
 
 export default class Configuration extends React.Component {
    
@@ -8,29 +8,35 @@ export default class Configuration extends React.Component {
     return (
         <View style= {{flex: 1}}>
             <Card
-                containerStyle = {{backgroundColor: 'blue'}}
-                title= {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>}>
-                <View style={{backgroundColor: 'red'}}>
-                    <Text style={{}}>
-                        {this.state.selectedItem.Description}
-                    </Text>
-                    <Button
-                        icon={<Icon name='code' color='#ffffff' />}
-                        backgroundColor='#03A9F4'
-                        title='INSTALL' 
-                    />
+                containerStyle = {{}}>
+                <View style={{alignItems : 'center'}}>
+                  <Avatar
+                    size="xlarge"
+                    title={this.state.selectedModule.name.substr(0,1)}
+                    activeOpacity={0.7}
+                    onLongPress = {() => console.log()}
+                  />
+                  <Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedModule.name}</Text>
                 </View>
             </Card>
+            <Card
+                containerStyle = {{}}
+                title = {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>Configuration</Text>}>
+                <View style={{}}>
+                  
+                </View>
+            </Card>
+
         </View>
     );
   }
   constructor(props) {
     super(props);
     this.state = {
-        selectedItem : {
-            name: 'MMM-JoarIsTheBest',
-            Description: 'Joar is the best because he is the best and the best and also the best because',
-            url: 'https://www.jprodagarna.se',
+        selectedModule : {
+            name: 'Weather',
+            Description: '',
+            url: '',
         },
     };
   }

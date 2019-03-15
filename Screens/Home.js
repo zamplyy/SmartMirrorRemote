@@ -48,7 +48,7 @@ export default class Home extends React.Component {
             >
             <Text
               style = {{color: '#fff', fontWeight: 'bold', fontSize: 15}}>
-              {this.state.isEdit ? 'Save' : 'Edit'}
+              {this.state.isSave ? 'Save' : 'Edit'}
             </Text>
           </TouchableHighlight>
         }
@@ -75,10 +75,10 @@ export default class Home extends React.Component {
               
             <View style={{ alignSelf:'center', flexBasis: '50%'}} key={index} >
               <Avatar
-                size="large"
-                title={module.substr(0,1)}
-                activeOpacity={0.7}
-                onLongPress = {() => this.props.navigation.navigate('Configuration')}
+              size="large"
+              title={module.substr(0,1)}
+              activeOpacity={0.7}
+              onLongPress = {() => this.state.isSave ?  null: this.props.navigation.navigate('Configuration')}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
                 {module}
@@ -91,11 +91,7 @@ export default class Home extends React.Component {
         </View>
 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
-          <Button style={{}}
-            title="Close Connection to Raspberry Pi"
-            onPress = {() => this.closeConnect()}
-          />
-
+         
           <Button style={{paddingTop : 20}}
             title="Send test message through socket"
             onPress = {() => global.socket.emit('message', 'My message 123')}
@@ -108,23 +104,18 @@ export default class Home extends React.Component {
     );
   }
 
-  closeConnect(){
-    global.socket.disconnect()
-    this.props.navigation.navigate('ConnectScreen')
-  }
-
   _onEditButton = () => {
     if (this.state.dragTime == 1 ){
       this.setState({
         dragTime : 99999,
-        isEdit : false,
+        isSave : false,
       })
       global.socket.emit('changePosition', this.state.currentLayout)
 
     } else {
       this.setState({
         dragTime : 1,
-        isEdit : true,
+        isSave : true,
       })
     }
   }
@@ -143,7 +134,7 @@ export default class Home extends React.Component {
       dragTime : 99999,
       socketConnected: true,
       message : "",
-      isEdit : false,
+      isSave : false,
       currentLayout : [
       ],
     };
