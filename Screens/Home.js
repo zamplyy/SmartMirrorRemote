@@ -6,29 +6,17 @@ import SortableGrid from 'react-native-sortable-grid'
 
 export default class Home extends React.Component {
 
-  /*static navigationOptions = ({ navigation }) => {
-    return {
-      headerRight: (
-        <Button
-          style= {{paddingRight: 10}}
-          onPress={navigation.getParam('onEditButton')}
-          title="Edit"
-          color="#fff"
-        />
-      ),
-    };
-  };*/
-
   componentWillMount() {
     this.props.navigation.setParams({ onEditButton: this._onEditButton });
     const { navigation } = this.props;
 
     global.socket.on('message', this.onReceivedMessage)
+    global.socket.on('layout', this.onReceivedLayout)
     this.setState({
       socketConnected: navigation.getParam('socketConnected', true)
     })
 
-    global.socket.emit('getLayout', 'test');
+    global.socket.emit('getLayout');
 
   }
 
@@ -71,17 +59,17 @@ export default class Home extends React.Component {
             
           >
           {
-            ['Weather', 'Clock', 'Compliments', 'Dates'].map( (module, index) =>
+            this.state.layout.map( (module, index) =>
               
             <View style={{ alignSelf:'center', flexBasis: '50%'}} key={index} >
               <Avatar
               size="large"
-              title={module.substr(0,1)}
+              title={module.name.substr(0,1)}
               activeOpacity={0.7}
-              onLongPress = {() => this.state.isSave ?  null: this.props.navigation.navigate('Configuration')}
+              onLongPress = {() => this.state.isSave ?  null: this.props.navigation.navigate('Configuration', {item: module.name})}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
-                {module}
+                {module.name}
               </Text>
 
             </View>
@@ -91,7 +79,10 @@ export default class Home extends React.Component {
         </View>
 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
-         
+          <Button style={{paddingTop : 20}}
+            title="LOG LAYOUT FROM SOCKET"
+            onPress = {() => console.log(this.state.layout)}
+          />
           <Button style={{paddingTop : 20}}
             title="Send test message through socket"
             onPress = {() => global.socket.emit('message', 'My message 123')}
@@ -110,7 +101,13 @@ export default class Home extends React.Component {
         dragTime : 99999,
         isSave : false,
       })
-      global.socket.emit('changePosition', this.state.currentLayout)
+      
+      this.state.currentLayout.forEach(element => {
+        console.log(element)
+      });
+
+      let savedLayout = this.reverseTranslateLayout(this.state.layout, this.state.currentLayout)
+      global.socket.emit('changePosition', savedLayout)
 
     } else {
       this.setState({
@@ -128,6 +125,42 @@ export default class Home extends React.Component {
     })
   }
 
+  translateLayout= (layout) => {
+    
+    let order = ['top_left', 'top_right', 'bottom_left', 'bottom_right'];
+    
+    const result = layout.sort((a, b) => order.indexOf(a.position) > order.indexOf(b.position));
+    
+    return result
+
+  }
+
+  reverseTranslateLayout= (layout , currentLayout) => {
+    
+    let currentOrder = [];
+    currentLayout.forEach(element => {
+      currentOrder.push(element.key)
+    });
+
+    let order = ['top_left', 'top_right', 'bottom_left', 'bottom_right'];
+    let i = 0
+    layout.forEach(element => {
+      element.position = order[currentOrder[i]]
+      i++
+    });
+    
+    return layout
+  }
+
+  onReceivedLayout= (layout) => {
+
+    layout = this.translateLayout(layout)
+
+    this.setState({
+      layout : layout,
+    })
+  }
+
   constructor(props) {
     super(props);
     this.state = { 
@@ -137,6 +170,7 @@ export default class Home extends React.Component {
       isSave : false,
       currentLayout : [
       ],
+      layout : [],
     };
   }
 }

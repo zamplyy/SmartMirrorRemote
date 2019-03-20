@@ -34,7 +34,7 @@ export default class Home extends React.Component {
 
     if (this.state.socketConnected == false){
       if(this.validateIPaddress(ipaddress)){
-        global.socket = SocketIOClient('http://' + ipaddress + ':3000')
+        global.socket = SocketIOClient('http://' + ipaddress + ':18000')
 
         setTimeout(() => {
           this.isConnected()
@@ -78,7 +78,7 @@ export default class Home extends React.Component {
     global.socket;
 
     this.state = {
-      inputIp: "127.0.0.1",
+      inputIp: "169.254.96.174",
       socketConnected : false,
     };
   }

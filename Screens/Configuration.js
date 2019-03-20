@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, } from 'react-native';
-import { Button, Card, Avatar} from 'react-native-elements';
+import { Button, Card, Avatar, ButtonGroup} from 'react-native-elements';
 
 export default class Configuration extends React.Component {
    
   render() {
+
+    const buttons = ['Hide', 'Show']
+    const { selectedIndex } = this.state
     return (
         <View style= {{flex: 1}}>
             <Card
@@ -23,13 +26,38 @@ export default class Configuration extends React.Component {
                 containerStyle = {{}}
                 title = {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>Configuration</Text>}>
                 <View style={{}}>
-                  
+                  <ButtonGroup
+                    onPress={this.updateIndex}
+                    selectedIndex={selectedIndex}
+                    buttons={buttons}
+                    containerStyle={{height: 40}}
+                  />
                 </View>
             </Card>
 
         </View>
     );
   }
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+
+    if (selectedIndex === 1){
+      global.socket.emit('show', this.state.selectedModule.name)
+    }else {
+      global.socket.emit('hide', this.state.selectedModule.name)
+    }
+  }
+
+  componentWillMount() {
+    const { navigation } = this.props;
+    const item = navigation.getParam('item', '');
+    this.setState({
+      selectedModule :{
+        name : item,
+      }
+    })
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +66,9 @@ export default class Configuration extends React.Component {
             Description: '',
             url: '',
         },
+        selectedIndex: 1,
     };
+    this.updateIndex = this.updateIndex.bind(this)
   }
 }
 
