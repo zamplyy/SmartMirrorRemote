@@ -101,10 +101,6 @@ export default class Home extends React.Component {
         dragTime : 99999,
         isSave : false,
       })
-      
-      this.state.currentLayout.forEach(element => {
-        console.log(element)
-      });
 
       let savedLayout = this.reverseTranslateLayout(this.state.layout, this.state.currentLayout)
       global.socket.emit('changePosition', savedLayout)
@@ -136,19 +132,27 @@ export default class Home extends React.Component {
   }
 
   reverseTranslateLayout= (layout , currentLayout) => {
+
+
     
     let currentOrder = [];
     currentLayout.forEach(element => {
       currentOrder.push(element.key)
     });
 
+    console.log(currentOrder)
+
     let order = ['top_left', 'top_right', 'bottom_left', 'bottom_right'];
-    let i = 0
-    layout.forEach(element => {
-      element.position = order[currentOrder[i]]
-      i++
-    });
+    for (let index = 0; index < currentOrder.length; index++) {
+      console.log("---")
+      const element = currentOrder[index];
+      console.log("currentOrder[index] = " + element)
+
+      layout[element].position = order[index]
+      
+    }
     
+    console.log(layout)
     return layout
   }
 

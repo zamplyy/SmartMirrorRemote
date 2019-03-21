@@ -38,7 +38,7 @@ export default class Home extends React.Component {
 
         setTimeout(() => {
           this.isConnected()
-        }, 200)
+        }, 400)
       }
     }
   }
@@ -78,7 +78,7 @@ export default class Home extends React.Component {
     global.socket;
 
     this.state = {
-      inputIp: "169.254.96.174",
+      inputIp: "192.168.0.107",
       socketConnected : false,
     };
   }
