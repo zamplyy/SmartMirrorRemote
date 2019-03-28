@@ -133,26 +133,17 @@ export default class Home extends React.Component {
 
   reverseTranslateLayout= (layout , currentLayout) => {
 
-
-    
     let currentOrder = [];
     currentLayout.forEach(element => {
       currentOrder.push(element.key)
     });
 
-    console.log(currentOrder)
-
     let order = ['top_left', 'top_right', 'bottom_left', 'bottom_right'];
     for (let index = 0; index < currentOrder.length; index++) {
-      console.log("---")
       const element = currentOrder[index];
-      console.log("currentOrder[index] = " + element)
-
       layout[element].position = order[index]
-      
     }
     
-    console.log(layout)
     return layout
   }
 
@@ -174,7 +165,24 @@ export default class Home extends React.Component {
       isSave : false,
       currentLayout : [
       ],
-      layout : [],
+      layout : [
+        {
+          name: 'clock',
+          position: 'top_left',
+        },
+        {
+          name: 'calender',
+          position: 'top_right',
+        },
+        {
+          name: 'compliments',
+          position: 'bottom_left',
+        },
+        {
+          name: 'currentweather',
+          position: 'bottom_right',
+        },
+      ],
     };
   }
 }

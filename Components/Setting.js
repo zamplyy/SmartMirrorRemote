@@ -89,7 +89,7 @@ class Setting extends React.Component{
 
 var styles = StyleSheet.create({
     container   : {
-        backgroundColor: '#4fb3bf',
+        backgroundColor: '#bbb',
         margin:10,
         overflow:'hidden'
     },

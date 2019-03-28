@@ -5,7 +5,7 @@ var socketio = require('socket.io');
 var app = express();
 var server = http.Server(app);
 var websocket = socketio(server);
-server.listen(3000, () => console.log('Starting Bridge server, listening on port 3000'));
+server.listen(18000, () => console.log('Starting Bridge server, listening on port 18000'));
 
 // The event will be called when a client is connected.
 websocket.on('connection', (socket) => {
