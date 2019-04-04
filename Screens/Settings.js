@@ -22,7 +22,7 @@ export default class Settings extends React.Component {
         />
         <ScrollView >
           <Setting title= "Brightness">
-          <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
+            <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
             <TouchableHighlight onPress={ () => console.log('Pressed Brightness 1')}>
               <Icon
                 name= 'brightness-1'
@@ -56,12 +56,27 @@ export default class Settings extends React.Component {
             />
           </Setting>
           <Setting title="Activate/inactivate">
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</Text>
+            <View>
+              <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</Text>
+            </View>
+          </Setting>
+
+          <Setting title="IP-Address">
+            <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
+              <Text>Hide/Show IP-Address</Text>
+              <Switch onValueChange = {this.toggleIpSwitch} value = {this.state.ipSwitchValue}/>
+            </View>
           </Setting>
         </ScrollView>
       </View>
     );
   }
+
+  toggleIpSwitch = (value) => {
+    this.setState({ipSwitchValue: value})
+    global.socket.emit("toggleIp", value)
+  }
+
   
   closeConnect(){
     global.socket.disconnect()
@@ -72,7 +87,7 @@ export default class Settings extends React.Component {
   constructor(props) { 
     super(props);
     this.state = {
-        
+        ipSwitchValue:true,
     };
   }
 }

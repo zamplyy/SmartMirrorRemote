@@ -6,12 +6,10 @@ class Setting extends React.Component{
     constructor(props){
         super(props);
 
-        this.icons = {     //Step 2
+        this.icons = {  
             'up'    : 'keyboard-arrow-up',
             'down'  : 'keyboard-arrow-down'
-            
         };
-
 
         this.state = {
             title       : props.title,
@@ -20,11 +18,9 @@ class Setting extends React.Component{
         };
     }
 
-
     toggle(){
-        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
-            finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
-
+        let initialValue = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
         this.setState({
             expanded : !this.state.expanded
         });
@@ -49,8 +45,6 @@ class Setting extends React.Component{
             minHeight   : event.nativeEvent.layout.height
         });
     }
-
-   
 
     render(){
         let icon = this.icons['down'];
