@@ -40,6 +40,9 @@ export default class Home extends React.Component {
           this.isConnected()
         }, 400)
       }
+      else {
+        alert('Please input a correct IP:adress, eg 192.168.0.1')
+      }
     }
   }
 
@@ -59,7 +62,7 @@ export default class Home extends React.Component {
       this.setState({
         socketConnected : false
       })
-      alert("Couldn't connect, is the IP address correct?")
+      alert("Couldn't connect, is the IP address correct? Or server middleware running?")
     }
 
 
@@ -78,7 +81,7 @@ export default class Home extends React.Component {
     global.socket;
 
     this.state = {
-      inputIp: "127.0.0.1",
+      inputIp: "192.168.0.103",
       socketConnected : false,
     };
   }

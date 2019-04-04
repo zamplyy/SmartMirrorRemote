@@ -80,15 +80,18 @@ export default class Home extends React.Component {
 
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
           <Button style={{paddingTop : 20}}
-            title="LOG LAYOUT FROM SOCKET"
-            onPress = {() => console.log(this.state.layout)}
+            title="Hide All Modules"
+            onPress = {() => global.socket.emit('hideAll')}
           />
           <Button style={{paddingTop : 20}}
-            title="Send test message through socket"
-            onPress = {() => global.socket.emit('message', 'My message 123')}
+            title="Show All Modules"
+            onPress = {() => global.socket.emit('showAll')}
           />
-
-          <Text>{this.state.message}</Text>
+          
+          <Button style={{paddingTop : 20}}
+            title="LOG LAYOUT "
+            onPress = {() => console.log(this.state.currentLayout)}
+          />
           
         </View>
       </View>
@@ -149,10 +152,10 @@ export default class Home extends React.Component {
 
   onReceivedLayout= (layout) => {
 
-    layout = this.translateLayout(layout)
+    layoutCorrect = this.translateLayout(layout)
 
     this.setState({
-      layout : layout,
+      layout : layoutCorrect,
     })
   }
 
@@ -164,24 +167,44 @@ export default class Home extends React.Component {
       message : "",
       isSave : false,
       currentLayout : [
+        {
+          "key": "0",
+          "order": 0,
+          "ref": null,
+        },
+        {
+          "key": "1",
+          "order": 1,
+          "ref": null,
+        },
+        {
+          "key": "2",
+          "order": 2,
+          "ref": null,
+        },
+        {
+          "key": "3",
+          "order": 3,
+          "ref": null,
+        },
       ],
       layout : [
-        {
-          name: 'clock',
+        /*{
+          name: 'test1',
           position: 'top_left',
         },
         {
-          name: 'calender',
+          name: 'test2',
           position: 'top_right',
         },
         {
-          name: 'compliments',
+          name: 'test3',
           position: 'bottom_left',
         },
         {
-          name: 'currentweather',
+          name: 'test4',
           position: 'bottom_right',
-        },
+        },*/
       ],
     };
   }
