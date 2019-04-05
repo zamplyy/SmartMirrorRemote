@@ -66,7 +66,11 @@ export default class Home extends React.Component {
               size="large"
               title={module.name.substr(0,1)}
               activeOpacity={0.7}
-              onLongPress = {() => this.state.isSave ?  null: this.props.navigation.navigate('Configuration', {item: module.name})}
+              onLongPress = {() => this.state.isSave ?  
+                null: this.props.navigation.navigate('Configuration', {
+                  item: module.name,
+                  modulesShown: this.state.layout,
+                })}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
                 {module.name}
