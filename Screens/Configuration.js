@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, } from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import { Button, Card, Avatar, ButtonGroup} from 'react-native-elements';
 
 export default class Configuration extends React.Component {
@@ -9,7 +9,7 @@ export default class Configuration extends React.Component {
     const buttons = ['Hide', 'Show']
     const { selectedIndex } = this.state
     return (
-        <View style= {{flex: 1}}>
+        <ScrollView style= {{flex: 1}}>
             <Card
                 containerStyle = {{}}>
                 <View style={{alignItems : 'center'}}>
@@ -34,8 +34,11 @@ export default class Configuration extends React.Component {
                   />
                 </View>
             </Card>
+            <Text>
+              {JSON.stringify(this.state.configObject)}
+            </Text>
 
-        </View>
+        </ScrollView>
     );
   }
   updateIndex (selectedIndex) {
@@ -56,17 +59,27 @@ export default class Configuration extends React.Component {
         name : item,
       }
     })
+    global.socket.on('setModuleConfig', this.onReceivedModuleConfig)
+    global.socket.emit('getModuleConfig', item)
+
+  }
+
+  onReceivedModuleConfig = (config) => {
+    this.setState({
+      configObject : config,
+    })
   }
 
   constructor(props) {
     super(props);
     this.state = {
         selectedModule : {
-            name: 'Weather',
+            name: '',
             Description: '',
             url: '',
         },
         selectedIndex: 1,
+        configObject: {},
     };
     this.updateIndex = this.updateIndex.bind(this)
   }
