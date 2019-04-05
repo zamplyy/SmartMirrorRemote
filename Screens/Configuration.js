@@ -87,16 +87,14 @@ export default class Configuration extends React.Component {
     const item = navigation.getParam('item', '');
     const modules = navigation.getParam('modulesShown', '');
     let modulesArray = []
-
     Object.keys(modules).forEach(index => {
         modulesArray.push(modules[index].name)
     });
-
     this.setState({
       selectedModule :{
         name : item,
       },
-      modulesShown: modules,
+      modulesShown: modulesArray,
     })
     global.socket.on('setModuleConfig', this.onReceivedModuleConfig)
     global.socket.on('setInstalledModules', this.onReceivedInstalledModules)
@@ -111,8 +109,21 @@ export default class Configuration extends React.Component {
   }
 
   onReceivedInstalledModules = (setInstalledModules) => {
+    self = this
     
-    console.log('Installed modules on MM is = ', setInstalledModules)
+    let installedModules = setInstalledModules.filter( function( el ) {
+      return self.state.modulesShown.indexOf( el ) < 0;
+    });
+    let modulesArray = [] 
+    installedModules.forEach(function (item){
+        modulesArray.push({
+          value : item.substr(0,3),
+          moduleLabel : item,
+        })
+    });
+    this.setState({
+      modulesInstalled : modulesArray,
+    })
     
   }
 
