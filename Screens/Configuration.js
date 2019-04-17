@@ -10,17 +10,18 @@ export default class Configuration extends React.Component {
     const buttons = ['Hide', 'Show']
     const { selectedIndex } = this.state
     return (
-        <ScrollView style= {{flex: 1}}>
+      <View style={{flex: 1}}>
+      <ScrollView style= {{}}>
             <Card
                 containerStyle = {{}}>
                 <View style={{alignItems : 'center'}}>
                   <Avatar
-                    size="xlarge"
+                    size="large"
                     title={this.state.selectedModule.name.substr(0,1)}
                     activeOpacity={0.7}
-                    onLongPress = {() => console.log()}
                   />
                   <Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedModule.name}</Text>
+                  <Text style={{textAlign : 'center'}}>{this.state.modulePosition}</Text>
                 </View>
             </Card>
             <Card
@@ -52,11 +53,22 @@ export default class Configuration extends React.Component {
             <Text>
               {/*JSON.stringify(this.state.configObject)*/}
             </Text>
-            
-           
-
         </ScrollView>
+        <View style = {{alignItems: 'center'}}>
+          <Button style= {{margin: 10, width: 140}}
+              title="Save Changes"
+              onPress= {() => this.saveChangesToConfig()}
+              disabled = {this.state.isChanged ? false : true}
+          />
+        </View>
+      </View>
     );
+  }
+
+  saveChangesToConfig() {
+
+    alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition)
+
   }
 
   pickerChange (index) {
@@ -68,6 +80,7 @@ export default class Configuration extends React.Component {
             value: this.state.modulesInstalled[index].value
           },
           module: this.state.modulesInstalled[index].moduleLabel,
+          isChanged: true,
         })
       }
     })
@@ -86,15 +99,21 @@ export default class Configuration extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam('item', '');
     const modules = navigation.getParam('modulesShown', '');
+
     let modulesArray = []
+    let modulesPosition = '';
     Object.keys(modules).forEach(index => {
         modulesArray.push(modules[index].name)
+        if(modules[index].name == item){
+          modulesPosition = modules[index].position
+        }
     });
     this.setState({
       selectedModule :{
         name : item,
       },
       modulesShown: modulesArray,
+      modulePosition: modulesPosition,
     })
     global.socket.on('setModuleConfig', this.onReceivedModuleConfig)
     global.socket.on('setInstalledModules', this.onReceivedInstalledModules)
@@ -145,6 +164,8 @@ export default class Configuration extends React.Component {
         ],
         currentLabel: 'Select Module to be shown',
         module: "",
+        isChanged: false,
+        modulePosition : '',
     };
     this.updateIndex = this.updateIndex.bind(this)
   }

@@ -92,11 +92,6 @@ export default class Home extends React.Component {
             onPress = {() => global.socket.emit('showAll')}
           />
           
-          <Button style={{paddingTop : 20}}
-            title="LOG LAYOUT "
-            onPress = {() => console.log(this.state.currentLayout)}
-          />
-          
         </View>
       </View>
     );
