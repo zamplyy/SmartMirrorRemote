@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Image} from 'react-native';
 import { Button, Input} from 'react-native-elements';
 import SocketIOClient from 'socket.io-client';
 
@@ -13,22 +13,29 @@ export default class Home extends React.Component {
   };
   render() {
     return (
-      <View style= {{flex:1 , justifyContent: 'center' , backgroundColor : '#E1E2E1'}}>
-        
-        <Input style= {{padding : 20}}
-          placeholder='Your Raspberry Pi:s IP'
-          onChangeText={(text) => 
-            this.setState({inputIp: text})
-          }
-        />
-
-        <Button style= {{padding : 20}}
-            buttonStyle={{backgroundColor: '#004a3f'}}
-            title="Connect!"
-            onPress= {() => this.tryToConnect(this.state.inputIp)}
-        />
-        
+      <View style= {{flex:1}}>
+        <View style= {{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor : '#E1E2E1'}}>
+          <Image 
+            source={require('../img/appLogo.png')} 
+            style={{width: 200, height: 200}}
+          />
+        </View>
+        <View style= {{flex:1 , backgroundColor : '#E1E2E1'}}>
+          <Input style= {{padding : 20}}
+            placeholder='Your Raspberry Pi:s IP'
+            onChangeText={(text) => 
+              this.setState({inputIp: text})
+            }
+          />
+          <Button style= {{padding : 20}}
+              buttonStyle={{backgroundColor: '#004a3f'}}
+              title="Connect!"
+              onPress= {() => this.tryToConnect(this.state.inputIp)}
+          />
+          
+        </View>
       </View>
+      
     );
   }
   tryToConnect(ipaddress){

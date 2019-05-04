@@ -19,7 +19,7 @@ export default class Search extends React.Component {
             justifyContent: 'space-around',
           }}
         />
-        <View style ={{flex: 1, backgroundColor: '#E1E2E1'}}>
+        <View style ={{flex: 1, backgroundColor: '#fff'}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
             onItemSelect={item => this.setState({
@@ -31,7 +31,11 @@ export default class Search extends React.Component {
               borderWidth: 1,
               borderColor: '#ccc',
               borderRadius: 5,
+              color: 'black'
             }}
+
+            placeholderTextColor= {'#bbb'}
+
             itemStyle={{
               padding: 10,
               marginTop: 4,

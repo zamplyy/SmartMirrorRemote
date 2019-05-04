@@ -31,7 +31,7 @@ export default class Home extends React.Component {
           <TouchableHighlight
             style = {{paddingRight : 10}}
             onPress = {() => this._onEditButton()}
-            underlayColor = '#3D6DCC'
+            underlayColor = '#bbb'
             hitSlop={{top: 10, bottom: 10, left: 20, right: 10}}
             >
             <Text
