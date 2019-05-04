@@ -55,6 +55,12 @@ export default class Settings extends React.Component {
               onPress = {() => this.closeConnect()}
             />
           </Setting>
+          <Setting title="Restart">
+            <Button style={{}}
+              title="Restart the MagicMirror"
+              onPress = {() => this.restartMagicMirror()}
+            />
+          </Setting>
           <Setting title="Activate/inactivate">
             <View>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</Text>
@@ -79,6 +85,13 @@ export default class Settings extends React.Component {
 
   
   closeConnect(){
+    global.socket.disconnect()
+    this.props.navigation.navigate('ConnectScreen')
+  }
+
+  restartMagicMirror(){
+
+    global.socket.emit("restart", "")
     global.socket.disconnect()
     this.props.navigation.navigate('ConnectScreen')
   }

@@ -70,6 +70,7 @@ export default class Home extends React.Component {
                 null: this.props.navigation.navigate('Configuration', {
                   item: module.name,
                   modulesShown: this.state.layout,
+                  returnData: this.returnData.bind(this),
                 })}
               />
               <Text style={{color: '#ffff', textAlign : 'center'}}>
@@ -90,6 +91,11 @@ export default class Home extends React.Component {
           <Button style={{paddingTop : 20}}
             title="Show All Modules"
             onPress = {() => global.socket.emit('showAll')}
+          />
+
+          <Button style={{paddingTop : 20}}
+            title="Log layout"
+            onPress = {() => console.log(this.state.layout)}
           />
           
         </View>
@@ -114,6 +120,19 @@ export default class Home extends React.Component {
       })
     }
   }
+
+  returnData(layoutCorrect) {
+
+    console.log('NEW LAYOUT : ', layoutCorrect)
+
+    console.log('OLD LAYOUT : ', this.state.layout)
+
+    
+    this.setState({
+      layout : layoutCorrect,
+    })
+  }
+
   //Event listener
   onReceivedMessage= (messages) => {
     console.log("TOG EMOT : "+ messages)
@@ -150,6 +169,8 @@ export default class Home extends React.Component {
   }
 
   onReceivedLayout= (layout) => {
+
+    console.log('RECEIVED LAYOUT : ', layout)
 
     layoutCorrect = this.translateLayout(layout)
 
@@ -188,7 +209,7 @@ export default class Home extends React.Component {
         },
       ],
       layout : [
-        /*{
+      /*  {
           name: 'test1',
           position: 'top_left',
         },
@@ -203,7 +224,7 @@ export default class Home extends React.Component {
         {
           name: 'test4',
           position: 'bottom_right',
-        },*/
+        }*/,
       ],
     };
   }

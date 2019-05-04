@@ -66,8 +66,22 @@ export default class Configuration extends React.Component {
   }
 
   saveChangesToConfig() {
+    
+    console.log()
+    console.log('layout = ', this.state.layout)
+    console.log()
 
-    alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition)
+    var layyyout = this.state.layout
+    layyyout[0] = {
+      "name": this.state.module,
+      "position": "top_left",
+    }
+
+    global.socket.emit('saveModules', layyyout);
+    //global.socket.emit('restart')
+    //this.props.navigation.goBack();
+
+    //alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition)
 
   }
 
@@ -99,6 +113,8 @@ export default class Configuration extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam('item', '');
     const modules = navigation.getParam('modulesShown', '');
+    
+    var layout2 = modules
 
     let modulesArray = []
     let modulesPosition = '';
@@ -114,6 +130,7 @@ export default class Configuration extends React.Component {
       },
       modulesShown: modulesArray,
       modulePosition: modulesPosition,
+      layout: layout2,
     })
     global.socket.on('setModuleConfig', this.onReceivedModuleConfig)
     global.socket.on('setInstalledModules', this.onReceivedInstalledModules)
