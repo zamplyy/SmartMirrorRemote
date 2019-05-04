@@ -11,9 +11,9 @@ export default class Configuration extends React.Component {
     const { selectedIndex } = this.state
     return (
       <View style={{flex: 1}}>
-      <ScrollView style= {{}}>
+      <ScrollView style= {{backgroundColor: '#E1E2E1'}}>
             <Card
-                containerStyle = {{}}>
+                containerStyle = {{ backgroundColor : '#F5F5F6'}}>
                 <View style={{alignItems : 'center'}}>
                   <Avatar
                     size="large"
@@ -25,7 +25,7 @@ export default class Configuration extends React.Component {
                 </View>
             </Card>
             <Card
-                containerStyle = {{}}
+                containerStyle = {{backgroundColor : '#F5F5F6'}}
                 title = {<Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>Configuration</Text>}>
                 <View style={{}}>
                   
@@ -34,6 +34,7 @@ export default class Configuration extends React.Component {
                     selectedIndex={selectedIndex}
                     buttons={buttons}
                     containerStyle={{height: 40}}
+                    selectedButtonStyle= {{backgroundColor:'#004a3f'}}
                   />
                   <Setting title="Change Module">
                     <View style={{}}>
@@ -51,11 +52,12 @@ export default class Configuration extends React.Component {
                 </View>
             </Card>
             <Text>
-              {/*JSON.stringify(this.state.configObject)*/}
+              {JSON.stringify(this.state.configObject)}
             </Text>
         </ScrollView>
-        <View style = {{alignItems: 'center'}}>
+        <View style = {{alignItems: 'center' , backgroundColor : '#F5F5F6'}}>
           <Button style= {{margin: 10, width: 140}}
+              buttonStyle={{backgroundColor: '#004a3f'}}
               title="Save Changes"
               onPress= {() => this.saveChangesToConfig()}
               disabled = {this.state.isChanged ? false : true}
@@ -66,23 +68,23 @@ export default class Configuration extends React.Component {
   }
 
   saveChangesToConfig() {
-    
-    console.log()
-    console.log('layout = ', this.state.layout)
-    console.log()
 
     var layyyout = this.state.layout
-    layyyout[0] = {
-      "name": this.state.module,
-      "position": "top_left",
-    }
+
+    layyyout.forEach(module => {
+      if(module.position == this.state.modulePosition) {
+        module.name = this.state.module,
+        module.position = this.state.modulePosition
+      }
+    });
 
     global.socket.emit('saveModules', layyyout);
-    //global.socket.emit('restart')
-    //this.props.navigation.goBack();
 
-    //alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition)
+    alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition + '. The Mirror will now restart')
 
+
+    global.socket.emit('restart')
+    this.props.navigation.navigate('ConnectScreen')
   }
 
   pickerChange (index) {
@@ -153,7 +155,7 @@ export default class Configuration extends React.Component {
     let modulesArray = [] 
     installedModules.forEach(function (item){
         modulesArray.push({
-          value : item.substr(0,3),
+          value : item,
           moduleLabel : item,
         })
     });

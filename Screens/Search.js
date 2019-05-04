@@ -13,15 +13,13 @@ export default class Search extends React.Component {
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle="light-content" // or directly
-          rightComponent={{ icon: 'school', style: { color: '#fff' } }}
-          leftComponent={{ icon: 'home', style: { color: '#fff' } }}
           centerComponent={{ text: 'Search', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
           containerStyle={{
-            backgroundColor: '#3D6DCC',
+            backgroundColor: '#007769',
             justifyContent: 'space-around',
           }}
         />
-        <View style ={{flex: 1}}>
+        <View style ={{flex: 1, backgroundColor: '#E1E2E1'}}>
           <SearchableDropdown
             onTextChange={text => console.log(text)}
             onItemSelect={item => this.setState({
@@ -51,7 +49,7 @@ export default class Search extends React.Component {
             underlineColorAndroid="transparent"
           />
         </View >
-        <View style= {{flex:1, marginTop: 40, paddingHorizontal: 20}}>
+        <View style= {{flex:1, paddingTop: 40, paddingHorizontal: 20, backgroundColor: '#F5F5F6'}}>
             <Text style={{textAlign : 'center', fontWeight: 'bold', fontSize: 20}}>{this.state.selectedItem.name}</Text>
             <ScrollView>
               <Text style={{textAlign : 'center',}}>
@@ -60,7 +58,7 @@ export default class Search extends React.Component {
             </ScrollView>
             <Button
               icon={<Icon name='code' color='#ffffff' />}
-              backgroundColor='#03A9F4'
+              buttonStyle={{backgroundColor: '#004a3f'}}
               containerStyle={{paddingBottom: 20}}
               title='INSTALL'
               onPress = {() => 

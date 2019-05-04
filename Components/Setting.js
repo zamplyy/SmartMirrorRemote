@@ -14,7 +14,7 @@ class Setting extends React.Component{
         this.state = {
             title       : props.title,
             expanded    : false,
-            animation   : new Animated.Value(50)
+            animation   : new Animated.Value(55)
         };
     }
 
@@ -83,7 +83,7 @@ class Setting extends React.Component{
 
 var styles = StyleSheet.create({
     container   : {
-        backgroundColor: '#bbb',
+        backgroundColor: '#48a697',
         margin:10,
         overflow:'hidden'
     },

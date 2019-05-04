@@ -13,7 +13,7 @@ export default class Home extends React.Component {
   };
   render() {
     return (
-      <View style= {{flex:1 , justifyContent: 'center' }}>
+      <View style= {{flex:1 , justifyContent: 'center' , backgroundColor : '#E1E2E1'}}>
         
         <Input style= {{padding : 20}}
           placeholder='Your Raspberry Pi:s IP'
@@ -23,6 +23,7 @@ export default class Home extends React.Component {
         />
 
         <Button style= {{padding : 20}}
+            buttonStyle={{backgroundColor: '#004a3f'}}
             title="Connect!"
             onPress= {() => this.tryToConnect(this.state.inputIp)}
         />

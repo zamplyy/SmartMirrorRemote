@@ -12,15 +12,13 @@ export default class Settings extends React.Component {
           placement="left"
           statusBarProps={{ barStyle: 'light-content' }}
           barStyle="light-content" // or directly
-          rightComponent={{ icon: 'home', style: { color: '#fff' } }}
-          leftComponent={{ icon: 'home', style: { color: '#fff' } }}
           centerComponent={{ text: 'Settings', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
           containerStyle={{
-            backgroundColor: '#3D6DCC',
+            backgroundColor: '#007769',
             justifyContent: 'space-around',
           }}
         />
-        <ScrollView >
+        <ScrollView style={{backgroundColor: '#E1E2E1'}}>
           <Setting title= "Brightness">
             <View style={{flexDirection: "row", justifyContent: 'space-between'}}>
             <TouchableHighlight onPress={ () => console.log('Pressed Brightness 1')}>
@@ -51,12 +49,14 @@ export default class Settings extends React.Component {
           </Setting>
           <Setting title="Logoff">
             <Button style={{}}
+              buttonStyle={{backgroundColor: '#004a3f'}}
               title="Close Connection to Raspberry Pi"
               onPress = {() => this.closeConnect()}
             />
           </Setting>
           <Setting title="Restart">
             <Button style={{}}
+              buttonStyle={{backgroundColor: '#004a3f'}}
               title="Restart the MagicMirror"
               onPress = {() => this.restartMagicMirror()}
             />

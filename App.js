@@ -38,7 +38,7 @@ const HomeScreens = createStackNavigator(
       navigationOptions: () => ({
         title: `Configuration`,
         headerStyle: {
-          backgroundColor: '#3D6DCC',
+          backgroundColor: '#007769',
 
         },
         headerTitleStyle: {
@@ -82,6 +82,13 @@ const Tabs = createBottomTabNavigator(
       }
     },
   },
+  {
+    tabBarOptions: {
+      activeTintColor: 'white',
+      inactiveTintColor: '#333',
+      style: {backgroundColor : '#48a697'}
+    },
+  }
 );
 const AppNavigator = createSwitchNavigator({
   ConnectScreen: {

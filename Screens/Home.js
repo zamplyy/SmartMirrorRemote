@@ -42,12 +42,12 @@ export default class Home extends React.Component {
         }
         centerComponent={{ text: 'Home', style: { color: '#fff', fontWeight: 'bold', fontSize: 20 } }}
         containerStyle={{
-          backgroundColor: '#3D6DCC',
+          backgroundColor: '#007769',
           justifyContent: 'space-around',
         }}
       />}
         
-        <View style={{backgroundColor: '#005662', flex:1}}> 
+        <View style={{backgroundColor: '#E1E2E1', flex:1}}> 
                 
           <SortableGrid 
             itemsPerRow = { 2 }
@@ -61,10 +61,12 @@ export default class Home extends React.Component {
           {
             this.state.layout.map( (module, index) =>
               
-            <View style={{ alignSelf:'center', flexBasis: '50%'}} key={index} >
+            <View style={{ alignItems:'center', flexBasis: '50%'}} key={index} >
               <Avatar
               size="large"
+              rounded
               title={module.name.substr(0,1)}
+              overlayContainerStyle={{backgroundColor: '#004a3f'}}
               activeOpacity={0.7}
               onLongPress = {() => this.state.isSave ?  
                 null: this.props.navigation.navigate('Configuration', {
@@ -73,7 +75,7 @@ export default class Home extends React.Component {
                   returnData: this.returnData.bind(this),
                 })}
               />
-              <Text style={{color: '#ffff', textAlign : 'center'}}>
+              <Text style={{color: '#444', textAlign : 'center'}}>
                 {module.name}
               </Text>
 
@@ -83,19 +85,16 @@ export default class Home extends React.Component {
           </SortableGrid>
         </View>
 
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}> 
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor : '#F5F5F6'}}> 
           <Button style={{paddingTop : 20}}
             title="Hide All Modules"
             onPress = {() => global.socket.emit('hideAll')}
+            buttonStyle={{backgroundColor: '#004a3f'}}
           />
           <Button style={{paddingTop : 20}}
             title="Show All Modules"
             onPress = {() => global.socket.emit('showAll')}
-          />
-
-          <Button style={{paddingTop : 20}}
-            title="Log layout"
-            onPress = {() => console.log(this.state.layout)}
+            buttonStyle={{backgroundColor: '#004a3f'}}
           />
           
         </View>
@@ -169,8 +168,6 @@ export default class Home extends React.Component {
   }
 
   onReceivedLayout= (layout) => {
-
-    console.log('RECEIVED LAYOUT : ', layout)
 
     layoutCorrect = this.translateLayout(layout)
 
