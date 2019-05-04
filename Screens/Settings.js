@@ -49,14 +49,14 @@ export default class Settings extends React.Component {
           </Setting>
           <Setting title="Logoff">
             <Button style={{}}
-              buttonStyle={{backgroundColor: '#004a3f'}}
+              buttonStyle={{backgroundColor: '#007769'}}
               title="Close Connection to Raspberry Pi"
               onPress = {() => this.closeConnect()}
             />
           </Setting>
           <Setting title="Restart">
             <Button style={{}}
-              buttonStyle={{backgroundColor: '#004a3f'}}
+              buttonStyle={{backgroundColor: '#007769'}}
               title="Restart the MagicMirror"
               onPress = {() => this.restartMagicMirror()}
             />

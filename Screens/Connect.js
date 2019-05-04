@@ -17,7 +17,7 @@ export default class Home extends React.Component {
         <View style= {{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor : '#E1E2E1'}}>
           <Image 
             source={require('../img/appLogo.png')} 
-            style={{width: 200, height: 200}}
+            style={{width: 220, height: 200}}
           />
         </View>
         <View style= {{flex:1 , backgroundColor : '#E1E2E1'}}>

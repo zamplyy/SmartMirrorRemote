@@ -52,7 +52,7 @@ export default class Configuration extends React.Component {
                 </View>
             </Card>
             <Text>
-              {JSON.stringify(this.state.configObject)}
+              {/*JSON.stringify(this.state.configObject)*/}
             </Text>
         </ScrollView>
         <View style = {{alignItems: 'center' , backgroundColor : '#F5F5F6'}}>
