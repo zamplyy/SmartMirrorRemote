@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, Switch, ScrollView, TouchableHighlight} from 'react-native';
 import { ListItem, Button, Header, Icon} from 'react-native-elements';
 import Setting from '../Components/Setting'
+import { AsyncStorage } from "react-native"
 
 export default class Settings extends React.Component {
    
@@ -83,10 +84,28 @@ export default class Settings extends React.Component {
     global.socket.emit("toggleIp", value)
   }
 
+  async removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key, (err) => {
+        console.log('done removing ' + key)
+      });
+      return true;
+    }
+    catch(exception) {
+      alert(exception)
+      return false;
+    }
+  }
+
   
-  closeConnect(){
-    global.socket.disconnect()
-    this.props.navigation.navigate('ConnectScreen')
+  async closeConnect(){
+
+    let flag = await this.removeItemValue('IPaddress')
+
+    if (flag == true) {
+      global.socket.disconnect()
+      this.props.navigation.navigate('ConnectScreen')
+    }
   }
 
   restartMagicMirror(){

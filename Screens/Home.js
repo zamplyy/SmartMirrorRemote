@@ -206,7 +206,7 @@ export default class Home extends React.Component {
         },
       ],
       layout : [
-      /*  {
+        /*{
           name: 'test1',
           position: 'top_left',
         },
@@ -221,7 +221,7 @@ export default class Home extends React.Component {
         {
           name: 'test4',
           position: 'bottom_right',
-        }*/,
+        },*/
       ],
     };
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View , Image} from 'react-native';
 import { Button, Input} from 'react-native-elements';
 import SocketIOClient from 'socket.io-client';
+import { AsyncStorage } from "react-native"
 
 export default class Home extends React.Component {
 
@@ -11,6 +12,7 @@ export default class Home extends React.Component {
       
     };
   };
+
   render() {
     return (
       <View style= {{flex:1}}>
@@ -22,7 +24,7 @@ export default class Home extends React.Component {
         </View>
         <View style= {{flex:1 , backgroundColor : '#E1E2E1'}}>
           <Input style= {{padding : 20}}
-            placeholder='Your Raspberry Pi:s IP'
+            placeholder= {this.state.hasIP ? this.state.inputIp : 'Your Raspberry Pi:s IP'}
             onChangeText={(text) => 
               this.setState({inputIp: text})
             }
@@ -32,12 +34,35 @@ export default class Home extends React.Component {
               title="Connect!"
               onPress= {() => this.tryToConnect(this.state.inputIp)}
           />
-          
         </View>
       </View>
       
     );
   }
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('IPaddress');
+      if (value !== null) {
+        this.setState({
+          inputIp : value,
+          hasIP : true,
+        })
+        this.tryToConnect(value)
+      }
+    } catch (error) {
+      console.log(error)
+      this.setState({
+        hasIP : false,
+      })
+      // Error retrieving data
+    }
+  }
+
+  componentDidMount() {
+    this._retrieveData()
+  }
+
   tryToConnect(ipaddress){
 
     if (this.state.socketConnected == false){
@@ -54,12 +79,23 @@ export default class Home extends React.Component {
     }
   }
 
+  storeData = async () => {
+    try {
+      await AsyncStorage.setItem('IPaddress', this.state.inputIp)
+    } catch (e) {
+      // saving error
+    }
+  }
+
   isConnected() {
     if(typeof global.socket === "undefined"){
       return;
     }
 
     if (global.socket.connected){
+
+      this.storeData()
+
       this.setState({
         socketConnected : true
       })
@@ -72,8 +108,6 @@ export default class Home extends React.Component {
       })
       alert("Couldn't connect, is the IP address correct? Or server middleware running?")
     }
-
-
   }
 
   validateIPaddress(ipaddress) {  
@@ -89,7 +123,7 @@ export default class Home extends React.Component {
     global.socket;
 
     this.state = {
-      inputIp: "192.168.10.201",
+      inputIp: "",
       socketConnected : false,
     };
   }
