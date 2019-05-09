@@ -48,7 +48,6 @@ export default class Home extends React.Component {
           inputIp : value,
           hasIP : true,
         })
-        this.tryToConnect(value)
       }
     } catch (error) {
       console.log(error)
@@ -60,7 +59,17 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+
     this._retrieveData()
+
+
+    if(typeof global.beenConnected == 'undefined'){
+      
+      setTimeout(() => {
+        this.tryToConnect(this.state.inputIp)
+
+      }, 500)
+    }
   }
 
   tryToConnect(ipaddress){
@@ -71,7 +80,7 @@ export default class Home extends React.Component {
 
         setTimeout(() => {
           this.isConnected()
-        }, 400)
+        }, 500)
       }
       else {
         alert('Please input a correct IP:adress, eg 192.168.0.1')
@@ -95,6 +104,8 @@ export default class Home extends React.Component {
     if (global.socket.connected){
 
       this.storeData()
+
+      global.beenConnected = true;
 
       this.setState({
         socketConnected : true

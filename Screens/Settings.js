@@ -62,10 +62,12 @@ export default class Settings extends React.Component {
               onPress = {() => this.restartMagicMirror()}
             />
           </Setting>
-          <Setting title="Activate/inactivate">
-            <View>
-              <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</Text>
-            </View>
+          <Setting title="Resend getLayout">
+            <Button style={{}}
+              buttonStyle={{backgroundColor: '#007769'}}
+              title="Resend"
+              onPress = {() => global.socket.emit('getLayout')}
+            />
           </Setting>
 
           <Setting title="IP-Address">
@@ -74,6 +76,8 @@ export default class Settings extends React.Component {
               <Switch onValueChange = {this.toggleIpSwitch} value = {this.state.ipSwitchValue}/>
             </View>
           </Setting>
+
+          
         </ScrollView>
       </View>
     );

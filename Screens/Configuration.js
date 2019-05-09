@@ -80,7 +80,7 @@ export default class Configuration extends React.Component {
 
     global.socket.emit('saveModules', layyyout);
 
-    alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition + '. The Mirror will now restart')
+    //alert('The modules you want to save is ' + this.state.module + ' in the position: ' + this.state.modulePosition + '. The Mirror will now restart')
 
 
     global.socket.emit('restart')

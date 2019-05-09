@@ -122,11 +122,6 @@ export default class Home extends React.Component {
 
   returnData(layoutCorrect) {
 
-    console.log('NEW LAYOUT : ', layoutCorrect)
-
-    console.log('OLD LAYOUT : ', this.state.layout)
-
-    
     this.setState({
       layout : layoutCorrect,
     })
